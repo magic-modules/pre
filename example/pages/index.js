@@ -23,6 +23,15 @@ module.exports = {
           },
           'example directory',
         ),
+        ' and gets built and published to github using ',
+        a(
+          {
+            href: 'https://github.com/magic/core',
+            target: '_blank',
+            rel: 'noopener',
+          },
+          '@magic/core',
+        ),
       ]),
     ]),
 }
