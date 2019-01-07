@@ -11,7 +11,8 @@
     "test": "t",
     "build": "NODE_ENV=production magic build",
     "dev": "magic dev",
-    "publish": "magic publish"
+    "publish": "magic publish",
+    "connect": "magic connect"
   },
   "repository": {
     "type": "git",
