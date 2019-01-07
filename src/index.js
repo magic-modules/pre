@@ -138,7 +138,7 @@ Float32Array Float64Array
         const [start, str, ...rest] = cleaned.split("'")
         let end = rest
         if (end.length === 1) {
-          end = end[0]
+          end = wordsByLine(end[0])
         } else if (end.length > 1) {
           end = wordsByLine(end.join("'"))
         }
