@@ -63,9 +63,6 @@ await byte finally catch
 in return for get const char
 module exports
 `
-        .replace(' ', '')
-        .replace('\n', '')
-
       const builtins = `
 Array Object String Number RegExp Null Symbol
 Set WeakSet Map WeakMap
@@ -77,12 +74,7 @@ Int16Array Uint16Array
 Int32Array Uint32Array
 Float32Array Float64Array
 `
-        .replace(' ', '')
-        .replace('\n', '')
-
       const booleans = `true false`
-
-      const hyperWords = `state actions`
 
       const wrapWords = string => {
         if (typeof string !== 'string') {
