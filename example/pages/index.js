@@ -13,7 +13,8 @@ module.exports = {
     h2('usage:'),
     p('in a page/component, just pass some string that looks like js'),
     Pre.View("module.exports = {\n  View: () => Pre.View('const js = true'),\n}"),
-
+    p('renders'),
+    Pre.View('const js = true'),
     h2('source'),
     p([
       'the source for this page is in the ',
@@ -21,11 +22,5 @@ module.exports = {
       ' and gets built and published to github using ',
       Link({ to: 'https://github.com/magic/core' }, '@magic/core'),
     ]),
-
-    h2('recursion'),
-    p('this is what the Pre component looks when rendered by Pre.View(Pre.View.toString())'),
-    Pre.View(`
-const Pre = ${Pre.View.toString()}
-`),
-  ])
+  ]),
 }
