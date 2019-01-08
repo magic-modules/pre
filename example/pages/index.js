@@ -1,9 +1,17 @@
 module.exports = {
-  Body: () =>
-    div([
+  Body: () => {
+    const complex = `
+const object = {
+  deep: { key: true },
+}
+
+const func = ({ test = 'true' }) => ({ test: 'true' })
+`
+
+    return div([
       h1('@magic-modules/pre'),
-      p('this is the Pre component'),
-      h3('Usage:'),
+      p(['this is the ', a({ href: 'https://github.com/magic-modules', target: '_blank', rel: 'noopener' }, '@magic-modules'), ' Pre component']),
+      h2('require:'),
       p('first add the component to the assets'),
       Pre.View(`
 // assets/index.js
@@ -11,8 +19,11 @@ module.exports = {
   //...other exports
   Pre: require('@magic-modules/pre'),
 }`),
-      p('then use it somewhere in a page/component'),
+      h2('usage:'),
+      p('in a page/component, just pass some string that looks like js'),
       Pre.View("module.exports = {\n  View: () => Pre.View('const js = true'),\n}"),
+
+      h2('source'),
       p([
         'the source for this page is in the ',
         a(
@@ -33,5 +44,9 @@ module.exports = {
           '@magic/core',
         ),
       ]),
-    ]),
+      h2('recursion'),
+      p('this is what the Pre component looks when rendered by Pre.View(Pre.View.toString())'),
+      Pre.View(Pre.View.toString()),
+    ])
+  },
 }
