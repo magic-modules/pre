@@ -21,8 +21,11 @@ module.exports = {
       ' and gets built and published to github using ',
       Link({ to: 'https://github.com/magic/core' }, '@magic/core'),
     ]),
+
     h2('recursion'),
     p('this is what the Pre component looks when rendered by Pre.View(Pre.View.toString())'),
-    Pre.View(Pre.View.toString()),
+    Pre.View(`
+const Pre = ${Pre.View.toString()}
+`),
   ])
-  }
+}
