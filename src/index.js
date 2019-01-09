@@ -281,7 +281,7 @@ Float32Array Float64Array
     }
 
     return pre({ class: `Pre ${theme || state.pre.theme}` }, [
-      div({class: 'menu' }, [
+      div({ class: 'menu' }, [
         !theme && button({ onclick: () => actions.pre.changeTheme('dark') }, 'dark'),
         !theme && button({ onclick: () => actions.pre.changeTheme('light') }, 'light'),
         button({ onclick: () => actions.pre.clip(content) }, 'copy'),
