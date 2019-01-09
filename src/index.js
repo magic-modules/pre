@@ -1,43 +1,148 @@
 module.exports = {
+  state: {
+    pre: {
+      theme: 'light',
+    },
+  },
+  actions: {
+    pre: {
+      changeTheme: theme => ({ theme }),
+      clip: content => {
+        if (typeof document !== 'undefined' && typeof document.execCommand === 'function') {
+          const copy = document.createElement('textarea')
+          copy.id = 'copy'
+          copy.innerHTML = content
+
+          document.body.appendChild(copy)
+          const child = document.getElementById('copy')
+          child.select()
+
+          document.execCommand('copy')
+          document.body.removeChild(child)
+        }
+      },
+    },
+  },
   style: {
     '.Pre': {
       display: 'block',
       fontFamily: 'monospace',
       whiteSpace: 'pre',
       margin: '1em 0',
+      lineHeight: 1.3,
+      border: '1px solid #666',
+      padding: '1em',
+      borderRadius: '5px',
+      counterReset: 'line',
 
-      '.tag': {
-        color: 'green',
+      '> code': {
+        display: 'block',
+        counterIncrement: 'line',
+
+        '&:before': {
+          content: 'counter(line)',
+          userSelect: 'none',
+          padding: '0 .5em 0 0',
+        },
       },
-      '.keyword': {
-        color: 'purple',
+
+      '.menu': {
+        float: 'right',
+        marginTop: '-.7em',
       },
-      '.builtin': {
-        color: 'cadetblue',
+
+      button: {
+        padding: 0,
       },
-      '.string': {
-        color: '#dd8f00 !important',
+
+      '&.light': {
+        backgroundColor: '#eee',
+
+        '> code:before': {
+          color: '#666',
+        },
+        '.html': {
+          color: '#008800',
+        },
+        '.keyword': {
+          color: 'purple',
+        },
+        '.builtin': {
+          color: 'cadetblue',
+        },
+        '.string': {
+          color: '#d15100',
+        },
+        '.colon': {
+          color: '#016301',
+        },
+        '.boolean': {
+          color: 'blue',
+        },
+        '.actions': {
+          color: 'blueviolet',
+        },
+        '.state': {
+          color: 'cornflowerblue',
+        },
+        '.comment': {
+          color: '#555',
+          fontStyle: 'italic',
+        },
+        '.object': {
+          color: '#016301',
+        },
+        '.property': {
+          color: '#2a952a',
+        },
       },
-      '.colon': {
-        color: 'darkgreen',
-      },
-      '.boolean': {
-        color: 'blue',
-      },
-      '.actions': {
-        color: 'blueviolet',
-      },
-      '.state': {
-        color: 'cornflowerblue',
-      },
-      '.comment': {
-        color: 'grey',
-        fontStyle: 'italic',
+
+      '&.dark': {
+        color: '#eee',
+        backgroundColor: '#222',
+
+        '> code:before': {
+          color: '#666',
+        },
+        '.html': {
+          color: '#008800',
+        },
+        '.keyword': {
+          color: 'violet',
+        },
+        '.builtin': {
+          color: 'cadetblue',
+        },
+        '.string': {
+          color: '#dd8f00',
+        },
+        '.colon': {
+          color: '#8eef8e',
+        },
+        '.boolean': {
+          color: 'blue',
+        },
+        '.actions': {
+          color: 'blueviolet',
+        },
+        '.state': {
+          color: 'cornflowerblue',
+        },
+        '.comment': {
+          color: '#999',
+          fontStyle: 'italic',
+        },
+        '.object': {
+          color: '#00ff00',
+        },
+        '.property': {
+          color: '#8eef8e',
+        },
       },
     },
   },
 
-  View: content => {
+  View: (content, theme = false) => (state, actions) => {
     const format = content => {
       const keywords = `
 let this long package float
@@ -61,7 +166,7 @@ int new async native switch
 else delete null public var
 await byte finally catch
 in return for get const char
-module exports
+module exports require
 `
       const builtins = `
 Array Object String Number RegExp Null Symbol
@@ -91,8 +196,8 @@ Float32Array Float64Array
           let cl = ''
           if (matched[i + 1] && matched[i + 1].includes(':')) {
             cl = 'colon'
-          } else if (isTag(word)) {
-            cl = 'tag'
+          } else if (isHtmlTag(word)) {
+            cl = 'html'
           } else if (keywords.includes(word)) {
             cl = 'keyword'
           } else if (builtins.includes(word)) {
@@ -103,6 +208,10 @@ Float32Array Float64Array
             cl = 'actions'
           } else if (booleans.includes(word)) {
             cl = 'boolean'
+          } else if (matched[i - 1] === '.') {
+            cl = 'property'
+          } else if (matched[i + 1] === '.') {
+            cl = 'object'
           }
 
           if (cl) {
@@ -123,7 +232,7 @@ Float32Array Float64Array
 
       const wordsByLine = line => {
         if (line.trim().startsWith('//')) {
-          return div({ class: 'line comment' }, line)
+          return code({ class: 'line comment' }, line)
         }
 
         const cleaned = line.replace(/"/g, "'")
@@ -144,7 +253,7 @@ Float32Array Float64Array
         return words
       }
 
-      const isTag = word => {
+      const isHtmlTag = word => {
         if (tags.hasOwnProperty(word)) {
           return true
         } else {
@@ -162,11 +271,32 @@ Float32Array Float64Array
         }
       }
 
-      const lines = content.split('\n').map(line => div({ class: 'line' }, wordsByLine(line)))
+      // remove the FIRST newlines if they is at the start of the string
+      // remove the LAST newlines, if they are at the end of the string
+      content = content.replace(/^\n|\n$/g, '')
+
+      const lines = content.split('\n').map(line => code({ class: 'line' }, wordsByLine(line)))
 
       return lines
     }
 
-    return div({ class: 'Pre' }, format(content))
+    return pre({ class: `Pre ${theme || state.pre.theme}` }, [
+      div({class: 'menu' }, [
+        !theme && button({ onclick: () => actions.pre.changeTheme('dark') }, 'dark'),
+        !theme && button({ onclick: () => actions.pre.changeTheme('light') }, 'light'),
+        button({ onclick: () => actions.pre.clip(content) }, 'copy'),
+      ]),
+      format(content),
+    ])
+  },
+
+  global: {
+    state: {
+      pre: true,
+    },
+    actions: {
+      pre: true,
+      clip: true,
+    },
   },
 }
