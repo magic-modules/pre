@@ -2,6 +2,15 @@ module.exports = {
   Body: () => div([
     h1('@magic-modules/pre'),
     p(['this is the ', Link({ to: 'https://github.com/magic-modules' }, '@magic-modules'), ' Pre component']),
+
+    h2('installation:'),
+    p('installation is done using npm. for now, all magic modules are living on github and not on npm.'),
+    p('note the missing @ before magic-modules.'),
+    p('this is how we install npm modules from github.'),
+    Pre.View(`
+npm install magic-modules/pre
+`),
+
     h2('require:'),
     p('first add the component to the assets'),
     Pre.View(`
