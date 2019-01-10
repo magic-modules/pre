@@ -31,7 +31,7 @@ module.exports = {
       margin: '1em 0',
       lineHeight: 1.3,
       border: '1px solid #666',
-      padding: '1em',
+      padding: '1em .5em 1em .2em',
       borderRadius: '5px',
       counterReset: 'line',
 
@@ -43,6 +43,9 @@ module.exports = {
           content: 'counter(line)',
           userSelect: 'none',
           padding: '0 .5em 0 0',
+          width: '3ch',
+          textAlign: 'right',
+          display: 'inline-block',
         },
       },
 
@@ -120,7 +123,7 @@ module.exports = {
           color: '#8eef8e',
         },
         '.boolean': {
-          color: 'blue',
+          color: '#7979e4',
         },
         '.actions': {
           color: 'blueviolet',
