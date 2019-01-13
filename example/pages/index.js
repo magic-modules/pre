@@ -1,5 +1,5 @@
 module.exports = {
-  Body: () =>
+  View: () =>
     div([
       h1('@magic-modules/pre'),
       p([
@@ -38,6 +38,7 @@ module.exports = {
 
       h3('dark'),
       Pre.View("Pre.View('content', 'dark')", 'dark'),
+
       h3('light'),
       Pre.View("Pre.View('content', 'light')", 'light'),
 
