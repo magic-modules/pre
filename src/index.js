@@ -56,6 +56,11 @@ module.exports = {
 
       button: {
         padding: 0,
+        margin: '0 .2em',
+        backgroundColor: '#666',
+        padding: '1px 3px',
+        borderRadius: '3px',
+        color: '#fefefe',
       },
 
       '&.light': {
@@ -145,7 +150,7 @@ module.exports = {
     },
   },
 
-  View: (content, theme = false) => (state, actions) => {
+  View: (content, theme = false, toggle = false) => (state, actions) => {
     const format = content => {
       const keywords = `
 let this long package float
