@@ -150,7 +150,7 @@ module.exports = {
     },
   },
 
-  View: (content, theme = false, toggle = false) => (state, actions) => {
+  View: (content, theme = false) => (state, actions) => {
     const format = content => {
       const keywords = `
 let this long package float
