@@ -288,10 +288,16 @@ Float32Array Float64Array
       return lines
     }
 
+    let color = 'dark'
+    if (!theme) {
+      if (state.pre.theme === 'dark') {
+        color = 'light'
+      }
+    }
+
     return pre({ class: `Pre ${theme || state.pre.theme}` }, [
       div({ class: 'menu' }, [
-        !theme && button({ onclick: () => actions.pre.changeTheme('dark') }, 'dark'),
-        !theme && button({ onclick: () => actions.pre.changeTheme('light') }, 'light'),
+        !theme && button({ onclick: () => actions.pre.changeTheme(color) }, color),
         button({ onclick: () => actions.pre.clip(content) }, 'copy'),
       ]),
       format(content),
