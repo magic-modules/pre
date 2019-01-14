@@ -33,29 +33,38 @@ module.exports = {
       fontFamily: 'monospace',
       margin: '1em 0',
       lineHeight: 1.3,
-      padding: '1em .5em 1em .2em',
-      overflowX: 'auto',
+      padding: '1em .5em 0 .2em',
+      position: 'relative',
       whiteSpace: 'pre',
 
       counterReset: 'line',
 
-      '> code': {
-        counterIncrement: 'line',
-        display: 'block',
+      'pre': {
+        overflowX: 'auto',
 
-        '&:before': {
-          content: 'counter(line)',
-          display: 'inline-block',
-          padding: '0 .5em 0 0',
-          textAlign: 'right',
-          userSelect: 'none',
-          width: '3ch',
+        '> code': {
+          counterIncrement: 'line',
+          display: 'block',
+
+          '&:before': {
+            content: 'counter(line)',
+            display: 'inline-block',
+            padding: '0 .5em 0 0',
+            textAlign: 'right',
+            userSelect: 'none',
+            width: '3ch',
+          },
+
+          '&:last-child': {
+            padding: '0 0 1em',
+          },
         },
       },
 
       '.menu': {
-        float: 'right',
-        marginTop: '-.7em',
+        position: 'absolute',
+        marginTop: '-2em',
+        right: 0,
       },
 
       button: {
@@ -298,12 +307,12 @@ Float32Array Float64Array
       }
     }
 
-    return pre({ class: `Pre ${theme || state.pre.theme}` }, [
+    return div({ class: `Pre ${theme || state.pre.theme}` }, [
       div({ class: 'menu' }, [
         !theme && button({ onclick: () => actions.pre.changeTheme(color) }, color),
         button({ onclick: () => actions.pre.clip(content) }, 'copy'),
       ]),
-      format(content),
+      pre(format(content)),
     ])
   },
 
