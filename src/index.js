@@ -202,7 +202,11 @@ Float32Array Float64Array
           }
 
           let cl = ''
-          if (matched[i + 1] && matched[i + 1].includes(':')) {
+          if (word === 'state') {
+            cl = 'state'
+          } else if (word === 'actions') {
+            cl = 'actions'
+          } else if (matched[i + 1] && matched[i + 1].includes(':')) {
             cl = 'colon'
           } else if (isHtmlTag(word)) {
             cl = 'html'
@@ -210,10 +214,6 @@ Float32Array Float64Array
             cl = 'keyword'
           } else if (builtins.includes(word)) {
             cl = 'builtin'
-          } else if (word === 'state') {
-            cl = 'state'
-          } else if (word === 'actions') {
-            cl = 'actions'
           } else if (booleans.includes(word)) {
             cl = 'boolean'
           } else if (matched[i - 1] === '.') {
