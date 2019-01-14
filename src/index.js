@@ -4,6 +4,7 @@ module.exports = {
       theme: 'light',
     },
   },
+
   actions: {
     pre: {
       changeTheme: theme => ({ theme }),
@@ -23,29 +24,32 @@ module.exports = {
       },
     },
   },
+
   style: {
     '.Pre': {
+      border: '1px solid #666',
+      borderRadius: '5px',
       display: 'block',
       fontFamily: 'monospace',
-      whiteSpace: 'pre',
       margin: '1em 0',
       lineHeight: 1.3,
-      border: '1px solid #666',
       padding: '1em .5em 1em .2em',
-      borderRadius: '5px',
+      overflowX: 'auto',
+      whiteSpace: 'pre',
+
       counterReset: 'line',
 
       '> code': {
-        display: 'block',
         counterIncrement: 'line',
+        display: 'block',
 
         '&:before': {
           content: 'counter(line)',
-          userSelect: 'none',
-          padding: '0 .5em 0 0',
-          width: '3ch',
-          textAlign: 'right',
           display: 'inline-block',
+          padding: '0 .5em 0 0',
+          textAlign: 'right',
+          userSelect: 'none',
+          width: '3ch',
         },
       },
 
@@ -55,12 +59,11 @@ module.exports = {
       },
 
       button: {
-        padding: 0,
-        margin: '0 .2em',
         backgroundColor: '#666',
-        padding: '1px 3px',
         borderRadius: '3px',
         color: '#fefefe',
+        margin: '0 .2em',
+        padding: '1px 3px',
       },
 
       '&.light': {
@@ -106,8 +109,8 @@ module.exports = {
       },
 
       '&.dark': {
-        color: '#eee',
         backgroundColor: '#222',
+        color: '#eee',
 
         '> code:before': {
           color: '#666',
