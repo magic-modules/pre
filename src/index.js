@@ -176,11 +176,7 @@ try import double enum
 
 boolean abstract function
 implements typeof transient break
-void static default do
-
-boolean abstract implements
-typeof function do break
-void static default transient
+default do static void
 
 int new async native switch
 else delete null public var
