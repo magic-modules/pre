@@ -39,7 +39,7 @@ module.exports = {
 
       counterReset: 'line',
 
-      'pre': {
+      pre: {
         overflowX: 'auto',
 
         '> code': {
