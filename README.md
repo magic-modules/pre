@@ -2,6 +2,12 @@
 
 syntax highlighting for [@magic](https://magic.github.io/core)
 
+[![NPM version][npm-image]][npm-url]
+[![Linux Build Status][travis-image]][travis-url]
+[![Windows Build Status][appveyor-image]][appveyor-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+[![Greenkeeper badge](https://badges.greenkeeper.io/magic/test.svg)](https://greenkeeper.io/)
+
 #### install:
 ```bash
 npm install --save-exact @magic-modules/pre
@@ -28,3 +34,12 @@ const component = {
   View: () => Pre('const name = true')
 }
 ```
+
+[npm-image]: https://img.shields.io/npm/v/@magic-modules/pre.svg
+[npm-url]: https://www.npmjs.com/package/@magic-modules/pre
+[travis-image]: https://api.travis-ci.org/magic-modules/pre.svg?branch=master
+[travis-url]: https://travis-ci.org/magic-modules/pre
+[appveyor-image]: https://img.shields.io/appveyor/ci/jaeh/pre/master.svg
+[appveyor-url]: https://ci.appveyor.com/project/jaeh/pre/branch/master
+[coveralls-image]: https://coveralls.io/repos/github/magic-modules/pre/badge.svg
+[coveralls-url]: https://coveralls.io/github/magic-modules/pre
