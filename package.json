@@ -12,8 +12,7 @@
     "build": "NODE_ENV=production magic build",
     "prod": "NODE_ENV=production magic build serve",
     "dev": "magic dev",
-    "publish": "magic publish",
-    "connect": "magic connect"
+    "calls": "calls"
   },
   "repository": {
     "type": "git",
