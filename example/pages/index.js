@@ -5,8 +5,16 @@ module.exports = {
       p([
         'this is the ',
         Link({ to: 'https://github.com/magic-modules' }, '@magic-modules'),
-        ' Pre component',
+        ' Pre component. It provides syntax highlighting for javascript',
       ]),
+
+      GitBadges({
+        npm: 'magic-modules/pre',
+        appveyor: 'jaeh/pre',
+        coveralls: 'magic-modules/pre',
+        travis: 'magic-modules/pre',
+        greenkeeper: 'magic-modules/pre',
+      }),
 
       h2('installation:'),
       p(
@@ -14,6 +22,7 @@ module.exports = {
       ),
       p('note the missing @ before magic-modules.'),
       p('this is how we install npm modules from github.'),
+
       Pre.View(`
 npm install magic-modules/pre
 `),
