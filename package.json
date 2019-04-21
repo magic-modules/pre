@@ -21,13 +21,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/magic-modules/pre/issues"
   },
   "homepage": "https://github.com/magic-modules/pre#readme",
   "devDependencies": {
     "@magic/core": "github:magic/core",
-    "@magic/test": "0.0.4"
+    "@magic/test": "0.0.7"
   }
 }
