@@ -164,8 +164,7 @@ module.exports = {
 
   View: (content, theme = false) => (state, actions) => {
     const format = content => {
-      const keywords = `
-let this long package float
+      const keywords = `let this long package float
 goto private class if short
 while protected with debugger case
 continue volatile interface
@@ -182,10 +181,9 @@ int new async native switch
 else delete null public var
 await byte finally catch
 in return for get const char
-module exports require
-`
-      const builtins = `
-Array Object String Number RegExp Null Symbol
+module exports require`
+
+      const builtins = `Array Object String Number RegExp Null Symbol
 Set WeakSet Map WeakMap
 setInterval setTimeout
 Promise
@@ -193,8 +191,8 @@ JSON
 Int8Array Uint8Array Uint8ClampedArray
 Int16Array Uint16Array
 Int32Array Uint32Array
-Float32Array Float64Array
-`
+Float32Array Float64Array`
+
       const booleans = `true false`
 
       const wrapWords = string => {
