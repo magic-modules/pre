@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "start": "t -p",
-    "format": "f -w",
-    "test": "t",
+    "format": "f -w --exclude docs",
+    "test": "t --exclude docs example config.js",
     "build": "NODE_ENV=production magic build",
     "prod": "NODE_ENV=production magic build serve",
     "dev": "magic dev",
@@ -29,5 +29,8 @@
     "@magic-modules/gitbadges": "github:magic-modules/gitbadges",
     "@magic/core": "github:magic/core",
     "@magic/test": "0.0.9"
+  },
+  "dependencies": {
+    "@magic-themes/docs": "github:magic-themes/docs"
   }
 }
