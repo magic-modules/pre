@@ -247,6 +247,13 @@ Float32Array Float64Array`
       const wordsByLine = line => {
         if (line.trim().startsWith('//')) {
           return code({ class: 'line comment' }, line)
+        } else if (line.includes('//')) {
+          const lines = line.split('//')
+          lines[0] = wordsByLine(lines[0])
+          for (let i = 1; i < lines.length; i++) {
+            lines[i] = code({ class: 'comment' }, `//${lines[i]}`)
+          }
+          return code({ class: 'line' }, lines)
         }
 
         const cleaned = line.replace(/"/g, "'")
