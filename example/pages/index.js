@@ -16,7 +16,7 @@ module.exports = {
         greenkeeper: 'magic-modules/pre',
       }),
 
-      h2('installation:'),
+      h2({ id: 'installation' }, 'installation:'),
       p(
         'installation is done using npm. for now, all magic modules are living on github and not on npm.',
       ),
@@ -27,7 +27,7 @@ module.exports = {
 npm install magic-modules/pre
 `),
 
-      h2('require:'),
+      h2({ id: 'require' }, 'require:'),
       p('first add the component to the assets'),
       Pre.View(`
 // assets/index.js
@@ -35,13 +35,13 @@ module.exports = {
   //...other exports
   Pre: require('@magic-modules/pre'),
 }`),
-      h2('usage:'),
+      h2({ id: 'usage' }, 'usage:'),
       p('in a page/component, just pass some string that looks like js'),
       Pre.View("module.exports = {\n  View: () => Pre.View('const js = true'),\n}"),
       p('renders'),
       Pre.View('const js = true'),
 
-      h2('fixed color:'),
+      h2({ id: 'fixed-color' }, 'fixed color:'),
       p('you can give a fixed color to a Pre.View by passing a second argument with the color.'),
       p('as you can see below, this also removes the theme choose buttons'),
 
@@ -51,7 +51,7 @@ module.exports = {
       h3('light'),
       Pre.View("Pre.View('content', 'light')", 'light'),
 
-      h2('source'),
+      h2({ id: 'source' }, 'source'),
       p([
         'the source for this page is in the ',
         Link(
