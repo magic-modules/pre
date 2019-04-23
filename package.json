@@ -28,6 +28,6 @@
   "devDependencies": {
     "@magic-modules/gitbadges": "github:magic-modules/gitbadges",
     "@magic/core": "github:magic/core",
-    "@magic/test": "0.0.7"
+    "@magic/test": "0.0.9"
   }
 }
