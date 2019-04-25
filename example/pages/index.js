@@ -9,11 +9,8 @@ module.exports = {
       ]),
 
       GitBadges({
-        npm: 'magic-modules/pre',
+        project: 'magic-modules/pre',
         appveyor: 'jaeh/pre',
-        coveralls: 'magic-modules/pre',
-        travis: 'magic-modules/pre',
-        greenkeeper: 'magic-modules/pre',
       }),
 
       h2({ id: 'installation' }, 'installation:'),
