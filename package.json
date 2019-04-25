@@ -29,6 +29,6 @@
     "@magic-modules/gitbadges": "github:magic-modules/gitbadges",
     "@magic-themes/docs": "github:magic-themes/docs",
     "@magic/core": "github:magic/core",
-    "@magic/test": "0.0.9"
+    "@magic/test": "0.0.10"
   }
 }
