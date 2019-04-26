@@ -247,6 +247,10 @@ Float32Array Float64Array`
       const wordsByLine = line => {
         if (line.trim().startsWith('//')) {
           return code({ class: 'line comment' }, line)
+        } else if (line.indexOf('://') > 2) {
+          return line
+            .split(' ')
+            .map(word => (word.includes('://') ? Link({ to: word }, word) : wordsByLine(word)))
         } else if (line.includes('//')) {
           const lines = line.split('//')
           lines[0] = wordsByLine(lines[0])
