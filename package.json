@@ -1,10 +1,6 @@
 {
   "name": "@magic-modules/pre",
   "version": "0.0.1",
-  "main": "src/index.js",
-  "files": [
-    "src"
-  ],
   "scripts": {
     "start": "t -p",
     "format": "f -w --exclude docs",
@@ -14,21 +10,65 @@
     "dev": "magic dev",
     "calls": "calls"
   },
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/magic-modules/pre.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/magic-modules/pre/issues"
   },
-  "homepage": "https://github.com/magic-modules/pre#readme",
   "devDependencies": {
     "@magic-modules/gitbadges": "github:magic-modules/gitbadges",
     "@magic-themes/docs": "github:magic-themes/docs",
     "@magic/core": "github:magic/core",
     "@magic/test": "0.0.10"
-  }
+  },
+  "author": "Wizards & Witches",
+  "homepage": "https://magic-modules.github.io/pre",
+  "license": "AGPL-3.0",
+  "description": "@magic pre module. Code highlighting.",
+  "keywords": [
+    "syntax",
+    "magic",
+    "pre",
+    "component"
+  ],
+  "contributors": [
+    {
+      "name": "jascha ehrenreich",
+      "github": "jaeh"
+    },
+    {
+      "name": "philipp tiefenbacher",
+      "github": "wizard23"
+    },
+    {
+      "name": "tom peak",
+      "github": "tompeak"
+    },
+    {
+      "name": "phileas lebada",
+      "github": "norpol"
+    },
+    {
+      "name": "litto",
+      "github": "mslitto"
+    },
+    {
+      "name": "daniel safar",
+      "github": "n1c3"
+    },
+    {
+      "name": "jay vaughan",
+      "github": "seclorum"
+    },
+    {
+      "name": "alexander weiss",
+      "github": "ylem235"
+    }
+  ]
 }
