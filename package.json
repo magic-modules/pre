@@ -7,7 +7,7 @@
     "test": "t --exclude docs example config.js",
     "build": "NODE_ENV=production magic build",
     "prod": "NODE_ENV=production magic build serve",
-    "dev": "magic dev",
+    "dev": "magic dev --watch src",
     "calls": "calls"
   },
   "main": "src/index.js",
@@ -25,7 +25,7 @@
     "@magic-modules/gitbadges": "github:magic-modules/gitbadges",
     "@magic-themes/docs": "github:magic-themes/docs",
     "@magic/core": "github:magic/core",
-    "@magic/test": "0.0.10"
+    "@magic/test": "0.0.12"
   },
   "author": "Wizards & Witches",
   "homepage": "https://magic-modules.github.io/pre",

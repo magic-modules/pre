@@ -48,6 +48,13 @@ module.exports = {
       h3('light'),
       Pre.View("Pre.View('content', 'light')", 'light'),
 
+      h3('urls'),
+      p([
+        'Pre can handle urls even though they look like comments.',
+        ' Those urls will even turn into Link elements.',
+      ]),
+      Pre.View('https://jaeh.at'),
+
       h2({ id: 'source' }, 'source'),
       p([
         'the source for this page is in the ',
