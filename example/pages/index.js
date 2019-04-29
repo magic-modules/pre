@@ -27,8 +27,8 @@ module.exports = () =>
     Pre(`
 // assets/index.js
 module.exports = {
-//...other exports
-Pre: require('@magic-modules/pre'),
+  //...other exports
+  Pre: require('@magic-modules/pre'),
 }`),
 
     h2({ id: 'usage' }, 'usage:'),
