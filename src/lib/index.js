@@ -129,8 +129,18 @@ const findLinks = line => {
 
 const wordsByLine = line => {
   const idx = line.indexOf('//')
-  if (line.trim().startsWith('//')) {
-    return code({ class: 'line comment' }, ['//', wordsByLine(line.substring(2))])
+  const trimmed = line.trim()
+  if (trimmed.startsWith('//')) {
+    const indentIdx = line.search(/\S|$/)
+    let indent = ''
+    for (let i = 0; i < indentIdx; i++) {
+      indent += ' '
+    }
+    if (!trimmed.startsWith('// ')) {
+      line = `${indent}// ${trimmed.substr(2)}`
+    }
+
+    return code({ class: 'line comment' }, [indent, '// ', wordsByLine(trimmed.substring(3))])
   } else if (idx > -1 && line[idx - 1] !== ':') {
     const idx = line.indexOf('//')
     const before = line.substring(0, idx)
