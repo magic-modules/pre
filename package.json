@@ -6,7 +6,7 @@
     "format": "f -w --exclude docs",
     "test": "t --exclude docs example config.js",
     "build": "NODE_ENV=production magic build",
-    "prod": "NODE_ENV=production magic build serve",
+    "prod": "NODE_ENV=production magic build serve --watch src",
     "dev": "magic dev --watch src",
     "calls": "calls"
   },
