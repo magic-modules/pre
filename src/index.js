@@ -15,7 +15,7 @@ Pre.state = {
 }
 
 Pre.actions = {
-  changeTheme: () => state => ({ theme: state.pre.theme === 'dark' ? 'light' : 'dark' }),
+  changeTheme: () => state => ({ theme: state.theme === 'dark' ? 'light' : 'dark' }),
   clip: content => {
     if (typeof document !== 'undefined' && typeof document.execCommand === 'function') {
       const copy = document.createElement('textarea')
