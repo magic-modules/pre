@@ -1,4 +1,5 @@
-const keywords = `let this long package float
+const keywords = `
+let this long package float
 goto private class if short
 while protected with debugger case
 continue volatile interface
@@ -15,9 +16,14 @@ int new async native switch
 else delete null public var
 await byte finally catch
 in return for get const char
-module exports require`
+module exports require
+`
+  .trim()
+  .split(/\b/g)
+  .map(w => w.trim())
 
-const builtins = `Array Object String Number RegExp Null Symbol
+const builtins = `
+Array Object String Number RegExp Null Symbol
 Set WeakSet Map WeakMap
 setInterval setTimeout
 Promise
@@ -25,7 +31,11 @@ JSON
 Int8Array Uint8Array Uint8ClampedArray
 Int16Array Uint16Array
 Int32Array Uint32Array
-Float32Array Float64Array`
+Float32Array Float64Array
+`
+  .trim()
+  .split(/\b/g)
+  .map(w => w.trim())
 
 const booleans = `true false`
 
@@ -72,8 +82,8 @@ const wrapWords = string => {
       cl = 'actions'
     } else if (matched[i + 1] && matched[i + 1].includes(':')) {
       cl = 'colon'
-    // } else if (isHtmlTag(word)) {
-    //   cl = 'html'
+      // } else if (isHtmlTag(word)) {
+      //   cl = 'html'
     } else if (keywords.includes(word)) {
       cl = 'keyword'
     } else if (builtins.includes(word)) {
@@ -96,20 +106,82 @@ const wrapWords = string => {
   return string
 }
 
-const wordsByLine = line => {
-  if (line.trim().startsWith('//')) {
-    return code({ class: 'line comment' }, line)
-  } else if (line.indexOf('://') > 2) {
+const findLinks = line => {
+  if (Array.isArray(line)) {
+    return line.map(findLinks)
+  }
+
+  console.log('mail', line.includes('@'), line.includes('.'), line.trim().includes(' '))
+  if (line.indexOf('://') > 2) {
     return line
       .split(' ')
-      .map(word => (word.includes('://') ? Link({ to: word }, word) : wordsByLine(word)))
-  } else if (line.includes('//')) {
-    const lines = line.split('//')
-    lines[0] = wordsByLine(lines[0])
-    for (let i = 1; i < lines.length; i++) {
-      lines[i] = code({ class: 'comment' }, `//${lines[i]}`)
+      .map(word => (word.includes('://') ? Link({ to: word }, word) : [wordsByLine(word), ' ']))
+  } else if (line.includes('@') && line.includes('.') && !line.trim().includes(' ')) {
+    let to = line.trim()
+    if (!to.startsWith('mailto:')) {
+      to = `mailto:${to}`
     }
-    return code({ class: 'line' }, lines)
+    return Link({ class: 'email', to }, line)
+  }
+
+  return line
+}
+
+const wordsByLine = line => {
+  const idx = line.indexOf('//')
+  if (line.trim().startsWith('//')) {
+    return code({ class: 'line comment' }, ['//', wordsByLine(line.substring(2))])
+  } else if (idx > -1 && line[idx - 1] !== ':') {
+    const idx = line.indexOf('//')
+    const before = line.substring(0, idx)
+    const after = line.substring(idx)
+
+    return code({ class: 'line' }, [
+      wordsByLine(before),
+      span({ class: 'comment' }, wordsByLine(after)),
+    ])
+  } else if (line.indexOf('://') > 2) {
+    return line
+      .split(/(?= )/)
+      .map(word => (word.includes('://') ? Link({ to: word }, word) : wordsByLine(word)))
+  } else if (line.indexOf('@') && line.includes('.') && !line.trim().includes(' ')) {
+    line = line.replace('mailto:', '')
+    const parts = line.split(/\b/g)
+    let linkStarted = false
+
+    let link = ''
+    const reg = /[^A-Za-z0-9.:]/g
+
+    parts.map((part, i) => {
+      let mailto = false
+      if (part === 'mailto') {
+        mailto = true
+        linkStarted = true
+        link = part
+      } else if (!mailto && part === '@') {
+        linkStarted = true
+        link = parts[i - 1] + part
+        parts[i - 1] = null
+      } else if (reg.test(part)) {
+        linkStarted = false
+      }
+
+      if (linkStarted && !reg.test(part)) {
+        link += part
+      }
+    })
+
+    if (link) {
+      const [before, after] = line.split(link)
+      let to = link
+      if (link.startsWith('mailto:')) {
+        link = link.replace('mailto:', '')
+      } else {
+        to = `mailto:${link}`
+      }
+      return [before, Link({ class: 'email', to }, link), after]
+    }
+    return line
   }
 
   const cleaned = line.replace(/"/g, "'")
@@ -133,8 +205,10 @@ const wordsByLine = line => {
 const wrapLine = line => code({ class: 'line' }, wordsByLine(line))
 
 const format = content =>
-  content.trim().split('\n').map(wrapLine)
-
+  content
+    .trim()
+    .split('\n')
+    .map(wrapLine)
 
 module.exports = {
   keywords,
@@ -142,5 +216,4 @@ module.exports = {
   format,
   wordsByLine,
   wrapWords,
-
 }
