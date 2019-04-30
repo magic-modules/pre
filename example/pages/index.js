@@ -79,7 +79,9 @@ module.exports = {
 
     p('both examples render the same'),
     Pre("Pre('mail@jaeh.at')"),
-    Pre("Pre('mailto:mail@jaeh.at')"),
+    Pre("Pre('mailto:test.mail@jaeh.at')"),
+
+    Pre("Link({ to: 'mailto:mail@jaeh.at' }, 'mail@jaeh.at')"),
     p('result'),
     Pre('mail@jaeh.at'),
 
