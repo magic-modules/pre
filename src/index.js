@@ -5,10 +5,12 @@ const Pre = (content, theme = false) => (state, actions) =>
         button({ onclick: actions.pre.changeTheme }, state.pre.theme === 'dark' ? 'light' : 'dark'),
       button({ onclick: () => actions.pre.clip(content) }, 'copy'),
     ]),
-    pre(LIB.PRE.format(content)),
+    pre(LIB.PRE.format(content).map(([props, children]) => {
+      return code(props, children)
+    })),
   ])
 
-Pre.View = Pre
+Pre.View = (...args) => Pre(...args)
 
 Pre.state = {
   theme: 'light',

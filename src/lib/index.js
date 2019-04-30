@@ -212,7 +212,7 @@ const wordsByLine = line => {
   return words
 }
 
-const wrapLine = line => code({ class: 'line' }, wordsByLine(line))
+const wrapLine = line => [{ class: 'line' }, wordsByLine(line)]
 
 const format = content =>
   content
