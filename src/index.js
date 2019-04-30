@@ -5,9 +5,7 @@ const Pre = (content, theme = false) => (state, actions) =>
         button({ onclick: actions.pre.changeTheme }, state.pre.theme === 'dark' ? 'light' : 'dark'),
       button({ onclick: () => actions.pre.clip(content) }, 'copy'),
     ]),
-    pre(LIB.PRE.format(content).map(([props, children]) => {
-      return code(props, children)
-    })),
+    pre(LIB.PRE.format(content)),
   ])
 
 Pre.View = (...args) => Pre(...args)
@@ -116,6 +114,7 @@ Pre.style = {
       },
       '.comment': {
         color: '#555',
+        opacity: '0.8',
         fontStyle: 'italic',
       },
       '.object': {
@@ -123,6 +122,14 @@ Pre.style = {
       },
       '.property': {
         color: '#2a952a',
+      },
+
+      a: {
+        color: '#d15100',
+
+        '&:hover': {
+          color: 'turquoise',
+        },
       },
     },
 
@@ -158,7 +165,7 @@ Pre.style = {
         color: 'cornflowerblue',
       },
       '.comment': {
-        color: '#999',
+        opacity: '0.7',
         fontStyle: 'italic',
       },
       '.object': {
@@ -166,6 +173,13 @@ Pre.style = {
       },
       '.property': {
         color: '#8eef8e',
+      },
+      a: {
+        color: 'turquoise',
+
+        '&:hover': {
+          color: '#d15100',
+        },
       },
     },
   },

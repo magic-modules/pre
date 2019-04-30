@@ -106,25 +106,54 @@ const wrapWords = string => {
   return string
 }
 
-const findLinks = line => {
-  if (Array.isArray(line)) {
-    return line.map(findLinks)
-  }
+const mailRegex = /([a-zA-Z0-9:+._-]+@[a-zA-Z0-9._-]+)/g
 
-  console.log('mail', line.includes('@'), line.includes('.'), line.trim().includes(' '))
-  if (line.indexOf('://') > 2) {
-    return line
-      .split(' ')
-      .map(word => (word.includes('://') ? Link({ to: word }, word) : [wordsByLine(word), ' ']))
-  } else if (line.includes('@') && line.includes('.') && !line.trim().includes(' ')) {
-    let to = line.trim()
-    if (!to.startsWith('mailto:')) {
-      to = `mailto:${to}`
+const wrapEmails = line =>
+  line.split(mailRegex).map(part => {
+    if (mailRegex.test(part)) {
+      const to = part.startsWith('mailto:') ? part : `mailto:${part}`
+      const text = part.replace('mailto:', '')
+      return Link({ class: 'email', to }, text)
     }
-    return Link({ class: 'email', to }, line)
+
+    return wrapWords(part)
+  })
+
+const wrapComments = (line, i) => [
+  wordsByLine(line.substring(0, i)),
+  wordsByLine(line.substring(i)),
+]
+
+const wrapLinks = line =>
+  line
+    .split(/(?= )/)
+    .map(word => (word.includes('://') ? Link({ to: word }, word) : wordsByLine(word)))
+
+const wrapUrls = line => {
+  if (line.includes('://') && !line.includes('@')) {
+    return wrapLinks(line)
+  } else {
+    return wrapEmails(line)
+  }
+}
+
+const wrapStrings = line => {
+  const cleaned = line.replace(/"/g, "'")
+  const [start, str, ...rest] = cleaned.split("'")
+  let end = rest
+  if (end.length === 1) {
+    end = wordsByLine(end[0])
+  } else if (end.length > 1) {
+    end = wordsByLine(end.join("'"))
   }
 
-  return line
+  let words = []
+  if (typeof str !== 'undefined') {
+    words = [wrapWords(start), span({ class: 'string' }, ["'", wrapUrls(str), "'"]), end]
+  } else {
+    words = wrapWords(line)
+  }
+  return words
 }
 
 const wordsByLine = line => {
@@ -140,79 +169,19 @@ const wordsByLine = line => {
       line = `${indent}// ${trimmed.substr(2)}`
     }
 
-    return code({ class: 'line comment' }, [indent, '// ', wordsByLine(trimmed.substring(3))])
+    return span({ class: 'comment' }, [indent, '// ', wordsByLine(trimmed.substring(3))])
   } else if (idx > -1 && line[idx - 1] !== ':') {
-    const idx = line.indexOf('//')
-    const before = line.substring(0, idx)
-    const after = line.substring(idx)
-
-    return code({ class: 'line' }, [
-      wordsByLine(before),
-      span({ class: 'comment' }, wordsByLine(after)),
-    ])
+    return wrapComments(line, idx)
   } else if (line.indexOf('://') > 2) {
-    return line
-      .split(/(?= )/)
-      .map(word => (word.includes('://') ? Link({ to: word }, word) : wordsByLine(word)))
+    return wrapLinks(line)
   } else if (line.indexOf('@') && line.includes('.') && !line.trim().includes(' ')) {
-    line = line.replace('mailto:', '')
-    const parts = line.split(/\b/g)
-    let linkStarted = false
-
-    let link = ''
-    const reg = /[^A-Za-z0-9.:]/g
-
-    parts.map((part, i) => {
-      let mailto = false
-      if (part === 'mailto') {
-        mailto = true
-        linkStarted = true
-        link = part
-      } else if (!mailto && part === '@') {
-        linkStarted = true
-        link = parts[i - 1] + part
-        parts[i - 1] = null
-      } else if (reg.test(part)) {
-        linkStarted = false
-      }
-
-      if (linkStarted && !reg.test(part)) {
-        link += part
-      }
-    })
-
-    if (link) {
-      const [before, after] = line.split(link)
-      let to = link
-      if (link.startsWith('mailto:')) {
-        link = link.replace('mailto:', '')
-      } else {
-        to = `mailto:${link}`
-      }
-      return [before, Link({ class: 'email', to }, link), after]
-    }
-    return line
+    return wrapEmails(line)
   }
 
-  const cleaned = line.replace(/"/g, "'")
-  const [start, str, ...rest] = cleaned.split("'")
-  let end = rest
-  if (end.length === 1) {
-    end = wordsByLine(end[0])
-  } else if (end.length > 1) {
-    end = wordsByLine(end.join("'"))
-  }
-
-  let words = []
-  if (typeof str !== 'undefined') {
-    words = [wrapWords(start), span({ class: 'string' }, `'${str}'`), end]
-  } else {
-    words = wrapWords(line)
-  }
-  return words
+  return wrapStrings(line)
 }
 
-const wrapLine = line => [{ class: 'line' }, wordsByLine(line)]
+const wrapLine = line => code({ class: 'line' }, wordsByLine(line))
 
 const format = content =>
   content
