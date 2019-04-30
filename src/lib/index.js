@@ -37,7 +37,7 @@ Float32Array Float64Array
   .split(/\b/g)
   .map(w => w.trim())
 
-const booleans = `true false`
+const booleans = ['true', 'false']
 
 // const known = '[object HTMLDivElement]'
 // const tags = {
