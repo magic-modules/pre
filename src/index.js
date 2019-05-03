@@ -8,8 +8,6 @@ const Pre = (content, theme = false) => (state, actions) =>
     pre(LIB.PRE.format(content)),
   ])
 
-Pre.View = (...args) => Pre(...args)
-
 Pre.state = {
   theme: 'light',
 }
