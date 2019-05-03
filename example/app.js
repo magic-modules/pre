@@ -1,5 +1,7 @@
 module.exports = {
   state: {
+    title: '@magic-modules/pre',
+    description: 'syntax highlighting for javascript',
     logo: '/img/logo.png',
     logotext: 'pre',
     menu: [
