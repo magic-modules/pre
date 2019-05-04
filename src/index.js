@@ -1,4 +1,5 @@
-const Pre = (content, theme = false) => (state, actions) =>
+const Pre = (content, theme = '') => (state, actions) =>
+  CHECK_PROPS({ content, theme }, Pre.props, 'Pre') &&
   div({ class: `Pre ${theme || state.pre.theme}` }, [
     div({ class: 'menu' }, [
       !theme &&
@@ -186,5 +187,10 @@ Pre.style = {
 Pre.lib = {
   PRE: require.resolve('./lib'),
 }
+
+Pre.props = [
+  { key: 'content', type: 'string' },
+  { key: 'theme', type: 'string' },
+]
 
 module.exports = Pre
