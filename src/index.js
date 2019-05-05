@@ -188,9 +188,6 @@ Pre.lib = {
   PRE: require.resolve('./lib'),
 }
 
-Pre.props = [
-  { key: 'content', type: 'string' },
-  { key: 'theme', type: 'string' },
-]
+Pre.props = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
 
 module.exports = Pre
