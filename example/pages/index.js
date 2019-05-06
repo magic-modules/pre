@@ -10,23 +10,7 @@ module.exports = state => [
   GitBadges('magic-modules/pre'),
 
   h2({ id: 'installation' }, 'installation:'),
-  p([
-    'installation is done using npm. ',
-    ' for now, all magic modules are living on github and not on npm.',
-  ]),
-  p('note the missing @ before magic-modules.'),
-  p('this is how we install npm modules from github.'),
-
   Pre('npm install magic-modules/pre'),
-
-  h2({ id: 'require' }, 'require:'),
-  p('first add the component to the assets'),
-  Pre(`
-// assets/index.js
-module.exports = {
-  //...other exports
-  Pre: require('@magic-modules/pre'),
-}`),
 
   h2({ id: 'usage' }, 'usage:'),
   p('in a page/component, just pass some string that looks like js'),
