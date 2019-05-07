@@ -79,6 +79,7 @@ Pre.style = {
       color: '#fefefe',
       margin: '0 .2em',
       padding: '1px 3px',
+      border: '0 none',
     },
 
     '&.light': {
