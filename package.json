@@ -25,7 +25,7 @@
     "@magic-modules/git-badges": "github:magic-modules/git-badges",
     "@magic-themes/docs": "github:magic-themes/docs",
     "@magic/core": "github:magic/core",
-    "@magic/test": "0.0.12"
+    "@magic/test": "0.1.0"
   },
   "author": "Wizards & Witches",
   "homepage": "https://magic-modules.github.io/pre",
