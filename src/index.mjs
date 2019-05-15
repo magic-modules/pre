@@ -1,6 +1,6 @@
 import path from 'path'
 
-export const Pre = (content, theme = '') => (state, actions) =>
+export const View = (content, theme = '') => (state, actions) =>
   CHECK_PROPS({ content, theme }, Pre.props, 'Pre') &&
   div({ class: `Pre ${theme || state.pre.theme}` }, [
     div({ class: 'menu' }, [
@@ -11,11 +11,11 @@ export const Pre = (content, theme = '') => (state, actions) =>
     pre(LIB.PRE.format(content)),
   ])
 
-Pre.state = {
+export const state = {
   theme: 'light',
 }
 
-Pre.actions = {
+export const actions = {
   changeTheme: () => state => ({ theme: state.theme === 'dark' ? 'light' : 'dark' }),
   clip: content => {
     if (typeof document !== 'undefined' && typeof document.execCommand === 'function') {
@@ -33,7 +33,7 @@ Pre.actions = {
   },
 }
 
-Pre.style = {
+export const style = {
   '.Pre': {
     border: '1px solid #666',
     borderRadius: '5px',
@@ -188,10 +188,8 @@ Pre.style = {
 }
 
 const dirName = new URL(import.meta.url).pathname
-Pre.lib = {
+export const lib = {
   PRE: path.join(path.dirname(dirName), 'lib', 'index.mjs'),
 }
 
-Pre.props = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
-
-export default Pre
+export const props = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
