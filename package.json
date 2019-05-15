@@ -1,6 +1,13 @@
 {
   "name": "@magic-modules/pre",
   "version": "0.0.1",
+  "author": "Wizards & Witches",
+  "homepage": "https://magic-modules.github.io/pre",
+  "license": "AGPL-3.0",
+  "description": "@magic pre module. syntax highlighting for javascript.",
+  "main": "src/index.mjs",
+  "module": "src/index.mjs",
+  "type": "module",
   "scripts": {
     "start": "t -p",
     "format": "f -w --exclude docs",
@@ -10,7 +17,6 @@
     "dev": "magic dev --watch src",
     "calls": "calls"
   },
-  "main": "src/index.js",
   "files": [
     "src"
   ],
@@ -25,12 +31,8 @@
     "@magic-modules/git-badges": "github:magic-modules/git-badges",
     "@magic-themes/docs": "github:magic-themes/docs",
     "@magic/core": "github:magic/core",
-    "@magic/test": "0.0.12"
+    "@magic/test": "0.1.1"
   },
-  "author": "Wizards & Witches",
-  "homepage": "https://magic-modules.github.io/pre",
-  "license": "AGPL-3.0",
-  "description": "@magic pre module. Code highlighting.",
   "keywords": [
     "syntax",
     "magic",
@@ -41,34 +43,6 @@
     {
       "name": "jascha ehrenreich",
       "github": "jaeh"
-    },
-    {
-      "name": "philipp tiefenbacher",
-      "github": "wizard23"
-    },
-    {
-      "name": "tom peak",
-      "github": "tompeak"
-    },
-    {
-      "name": "phileas lebada",
-      "github": "norpol"
-    },
-    {
-      "name": "litto",
-      "github": "mslitto"
-    },
-    {
-      "name": "daniel safar",
-      "github": "n1c3"
-    },
-    {
-      "name": "jay vaughan",
-      "github": "seclorum"
-    },
-    {
-      "name": "alexander weiss",
-      "github": "ylem235"
     }
   ]
 }
