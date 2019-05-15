@@ -1,4 +1,4 @@
-const keywords = `
+export const keywords = `
 let this long package float
 goto private class if short
 while protected with debugger case
@@ -7,6 +7,7 @@ continue volatile interface
 instanceof super synchronized throw
 extends final export throws
 try import double enum
+import default from '../../../../core/config';
 
 boolean abstract function
 implements typeof transient break
@@ -22,7 +23,7 @@ module exports require
   .split(/\b/g)
   .map(w => w.trim())
 
-const builtins = `
+export const builtins = `
 Array Object String Number RegExp Null Symbol
 Set WeakSet Map WeakMap
 setInterval setTimeout
@@ -37,7 +38,7 @@ Float32Array Float64Array
   .split(/\b/g)
   .map(w => w.trim())
 
-const booleans = ['true', 'false']
+export const booleans = ['true', 'false']
 
 // const known = '[object HTMLDivElement]'
 // const tags = {
@@ -63,7 +64,7 @@ const booleans = ['true', 'false']
 //   }
 // }
 
-const wrapWords = string => {
+export const wrapWords = string => {
   if (typeof string !== 'string') {
     return string
   }
@@ -106,9 +107,9 @@ const wrapWords = string => {
   return string
 }
 
-const mailRegex = /([a-zA-Z0-9:+._-]+@[a-zA-Z0-9._-]+)/g
+export const mailRegex = /([a-zA-Z0-9:+._-]+@[a-zA-Z0-9._-]+)/g
 
-const wrapEmails = line =>
+export const wrapEmails = line =>
   line.split(mailRegex).map(part => {
     if (mailRegex.test(part)) {
       const to = part.startsWith('mailto:') ? part : `mailto:${part}`
@@ -119,12 +120,12 @@ const wrapEmails = line =>
     return wrapWords(part)
   })
 
-const wrapComments = (line, i) => [
+export const wrapComments = (line, i) => [
   wordsByLine(line.substring(0, i)),
   wordsByLine(line.substring(i)),
 ]
 
-const wrapLinks = line =>
+export const wrapLinks = line =>
   line
     .split(/(?= )/)
     .map(word => (word.includes('://') ? Link({ to: word }, word) : wordsByLine(word)))
@@ -137,7 +138,7 @@ const wrapUrls = line => {
   }
 }
 
-const wrapStrings = line => {
+export const wrapStrings = line => {
   const cleaned = line.replace(/"/g, "'")
   const [start, str, ...rest] = cleaned.split("'")
   let end = rest
@@ -156,7 +157,7 @@ const wrapStrings = line => {
   return words
 }
 
-const wordsByLine = line => {
+export const wordsByLine = line => {
   const idx = line.indexOf('//')
   const trimmed = line.trim()
   if (trimmed.startsWith('//')) {
@@ -181,15 +182,15 @@ const wordsByLine = line => {
   return wrapStrings(line)
 }
 
-const wrapLine = line => code({ class: 'line' }, wordsByLine(line))
+export const wrapLine = line => code({ class: 'line' }, wordsByLine(line))
 
-const format = content =>
+export const format = content =>
   content
     .trim()
     .split('\n')
     .map(wrapLine)
 
-module.exports = {
+export default {
   keywords,
   builtins,
   format,

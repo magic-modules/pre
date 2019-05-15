@@ -1,4 +1,6 @@
-const Pre = (content, theme = '') => (state, actions) =>
+import path from 'path'
+
+export const Pre = (content, theme = '') => (state, actions) =>
   CHECK_PROPS({ content, theme }, Pre.props, 'Pre') &&
   div({ class: `Pre ${theme || state.pre.theme}` }, [
     div({ class: 'menu' }, [
@@ -185,10 +187,11 @@ Pre.style = {
   },
 }
 
+const dirName = new URL(import.meta.url).pathname
 Pre.lib = {
-  PRE: require.resolve('./lib'),
+  PRE: path.join(path.dirname(dirName), 'lib', 'index.mjs'),
 }
 
 Pre.props = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
 
-module.exports = Pre
+export default Pre
