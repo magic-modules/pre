@@ -1,7 +1,7 @@
 import path from 'path'
 
 export const View = (content, theme = '') => (state, actions) =>
-  CHECK_PROPS({ content, theme }, Pre.props, 'Pre') &&
+  CHECK_PROPS({ content, theme }, propTypes, 'Pre') &&
   div({ class: `Pre ${theme || state.pre.theme}` }, [
     div({ class: 'menu' }, [
       !theme &&
@@ -16,7 +16,9 @@ export const state = {
 }
 
 export const actions = {
-  changeTheme: () => state => ({ theme: state.theme === 'dark' ? 'light' : 'dark' }),
+  changeTheme: () => state => ({
+    theme: state.theme === 'dark' ? 'light' : 'dark',
+  }),
   clip: content => {
     if (typeof document !== 'undefined' && typeof document.execCommand === 'function') {
       const copy = document.createElement('textarea')
@@ -192,4 +194,4 @@ export const lib = {
   PRE: path.join(path.dirname(dirName), 'lib', 'index.mjs'),
 }
 
-export const props = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
+export const propTypes = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
