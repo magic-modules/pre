@@ -8,7 +8,7 @@ export const View = (content, theme = '') => (state, actions) =>
         button({ onclick: actions.pre.changeTheme }, state.pre.theme === 'dark' ? 'light' : 'dark'),
       button({ onclick: () => actions.pre.clip(content) }, 'copy'),
     ]),
-    pre(LIB.PRE.format(content)),
+    pre(LIB.Pre.format(content)),
   ])
 
 export const state = {
@@ -187,11 +187,6 @@ export const style = {
       },
     },
   },
-}
-
-const dirName = new URL(import.meta.url).pathname
-export const lib = {
-  PRE: path.join(path.dirname(dirName), 'lib', 'index.mjs'),
 }
 
 export const propTypes = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
