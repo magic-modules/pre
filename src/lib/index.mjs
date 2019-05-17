@@ -7,7 +7,6 @@ continue volatile interface
 instanceof super synchronized throw
 extends final export throws
 try import double enum
-import default from '../../../../core/config';
 
 boolean abstract function
 implements typeof transient break
