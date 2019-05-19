@@ -3,18 +3,19 @@ export const View = props => {
     props = {
       content: props,
       theme: 'light',
-      fixed: !!props.theme,
+      // fixed: !!props.theme,
     }
   }
 
   CHECK_PROPS(props, propTypes, 'Pre')
 
-  const { theme, content, fixed } = props
+  const { theme, content, /*fixed*/ } = props
 
   return div({ class: `Pre ${theme}` }, [
     div({ class: 'menu' }, [
-      !fixed &&
-        button({ onclick: [actions.pre.changeTheme] }, theme === 'dark' ? 'light' : 'dark'),
+      // has to be disabled until we added subscription to theme changes
+      // !fixed &&
+      //   button({ onclick: [actions.pre.changeTheme] }, theme === 'dark' ? 'light' : 'dark'),
       button({ onclick: [actions.pre.clip, e => ({ e, content })] }, 'copy'),
     ]),
     pre(LIB.Pre.format(content)),
@@ -27,14 +28,14 @@ export const state = {
 
 export const actions = {
   pre: {
-    changeTheme: state => {
-      const pre = state.pre
-      pre.theme = state.theme === 'dark' ? 'light' : 'dark'
-      return {
-        ...state,
-        pre,
-      }
-    },
+    // changeTheme: state => {
+    //   const pre = state.pre
+    //   pre.theme = state.theme === 'dark' ? 'light' : 'dark'
+    //   return {
+    //     ...state,
+    //     pre,
+    //   }
+    // },
     clip: (state, { content }) => {
       if (typeof document !== 'undefined' && typeof document.execCommand === 'function') {
         const copy = document.createElement('textarea')
@@ -52,6 +53,10 @@ export const actions = {
     },
   },
 }
+
+// export const subscriptions = {
+//   testing: (...a) => console.log(...a),
+// }
 
 export const style = {
   border: '1px solid #666',
