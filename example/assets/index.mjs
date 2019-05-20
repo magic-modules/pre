@@ -1,3 +1,1 @@
-module.exports = {
-  Pre: require('../../src'),
-}
+export * as Pre from '../../src/index.mjs'
