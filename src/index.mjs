@@ -18,7 +18,7 @@ export const View = props => {
       //   button({ onclick: [actions.pre.changeTheme] }, theme === 'dark' ? 'light' : 'dark'),
       button({ onclick: [actions.pre.clip, e => ({ e, content })] }, 'copy'),
     ]),
-    pre(LIB.Pre.format(content)),
+    pre(lib.pre.format(content)),
   ])
 }
 
