@@ -9,7 +9,7 @@ export const View = props => {
 
   CHECK_PROPS(props, propTypes, 'Pre')
 
-  const { theme, content, /*fixed*/ } = props
+  const { theme, content /*, fixed*/ } = props
 
   return div({ class: `Pre ${theme}` }, [
     div({ class: 'menu' }, [
