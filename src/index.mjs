@@ -54,10 +54,6 @@ export const actions = {
   },
 }
 
-// export const subscriptions = {
-//   testing: (...a) => console.log(...a),
-// }
-
 export const style = {
   border: '1px solid #666',
   borderRadius: '5px',
