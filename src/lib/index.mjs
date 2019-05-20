@@ -189,10 +189,4 @@ export const format = content =>
     .split('\n')
     .map(wrapLine)
 
-export default {
-  keywords,
-  builtins,
-  format,
-  wordsByLine,
-  wrapWords,
-}
+export default { format }
