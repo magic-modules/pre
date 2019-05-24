@@ -7,7 +7,7 @@ export const View = props => {
     }
   }
 
-  CHECK_PROPS(props, propTypes.Pre, 'Pre')
+  CHECK_PROPS(props, propTypes, 'Pre')
 
   const { theme, content /*, fixed*/ } = props
 
