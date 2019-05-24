@@ -7,7 +7,7 @@ export const View = props => {
     }
   }
 
-  CHECK_PROPS(props, propTypes, 'Pre')
+  CHECK_PROPS(props, propTypes.Pre, 'Pre')
 
   const { theme, content /*, fixed*/ } = props
 
@@ -206,4 +206,6 @@ export const style = {
   },
 }
 
-export const propTypes = [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }]
+export const propTypes = {
+  Pre: [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }],
+}
