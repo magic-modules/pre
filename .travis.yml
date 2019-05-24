@@ -18,7 +18,6 @@ matrix:
 
 install:
   - npm install
-  - npm link
 
 script:
   - npm test
