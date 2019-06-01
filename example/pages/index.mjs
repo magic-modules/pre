@@ -19,17 +19,12 @@ export const View = state => [
   Pre('const js = true'),
 
   h2({ id: 'themes' }, 'colors'),
-  p('Pre supports two color themes'),
-
-  h3({ id: 'themes-fixed' }, 'fixed color:'),
-  p('you can give a fixed color to a Pre by passing a second argument with the color.'),
-  p('as you can see below, this also removes the theme choose buttons'),
-
-  h3({ id: 'themes-dark' }, 'dark'),
-  Pre("Pre('content', 'dark')", 'dark'),
-
-  h3({ id: 'themes-light' }, 'light'),
-  Pre("Pre('content', 'light')", 'light'),
+  p('Pre supports two color themes. It will automatically adapt to the global theme settings.'),
+  p([
+    'the @magic-modules/',
+    Link({ to: 'https://github.com/magic-modules/light-switch' }, 'light-switch'),
+    ' module allows users to toggle dark/light modes.',
+  ]),
 
   h2({ id: 'syntax' }, 'syntax'),
 
@@ -53,17 +48,17 @@ export const View = state => [
   h3({ id: 'syntax-emails' }, 'emails'),
   p([
     'Pre finds emails in your text.',
-    ' emails can either start with mailto: or must include at least one @ and at least one .',
-    'yes, strictly speaking, name@host is a valid email, but how often have you seen that?',
+    ' emails can either start with mailto: or must include at least one dot `.` and at least one `@`.',
+    ' yes, strictly speaking, name@host is a valid email, but how often have you seen that?',
   ]),
   p(['if you actually do need support for name@local, please file an issue.']),
 
-  p('both examples render the same'),
+  h3({ id: 'examples' }, 'examples'),
   Pre("Pre('mail@jaeh.at')"),
-  Pre("Pre('mailto:test.mail@jaeh.at')"),
-
+  Pre("Pre('mailto:mail@jaeh.at')"),
   Pre("Link({ to: 'mailto:mail@jaeh.at' }, 'mail@jaeh.at')"),
-  p('result'),
+
+  h3('result if used as bare string:'),
   Pre('mail@jaeh.at'),
 
   p('link and comment'),
@@ -78,4 +73,6 @@ const v = "t" // comment https://jaeh.at
     ' and gets built and published to github using ',
     Link({ to: 'https://github.com/magic/core' }, '@magic/core'),
   ]),
+
+  LightSwitch(state),
 ]

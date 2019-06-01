@@ -1,20 +1,11 @@
 export const state = {
   title: '@magic-modules/pre',
   description: 'syntax highlighting for javascript',
-  logo: '/img/logo.png',
-  logotext: 'pre',
+  logotext: 'Pre',
   menu: [
     { to: '/#installation', text: 'installation' },
     { to: '/#usage', text: 'usage' },
-    {
-      to: '/#themes',
-      text: 'colors',
-      items: [
-        { to: '/#themes-fixed', text: 'fixed color' },
-        { to: '/#themes-dark', text: 'dark' },
-        { to: '/#themes-light', text: 'light' },
-      ],
-    },
+    { to: '/#themes', text: 'themes' },
     {
       to: '/#syntax',
       text: 'syntax',
