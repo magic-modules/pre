@@ -8,8 +8,8 @@ export default [
     info: 'expect Pre.View to be a function',
   },
   {
-    fn: () => Pre.propTypes,
+    fn: () => Pre.propTypes.Pre,
     expect: is.array,
-    info: 'expect Pre.propTypes to be an array',
+    info: 'expect Pre.propTypes.Pre to be an array',
   },
 ]
