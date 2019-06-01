@@ -8,6 +8,9 @@
   "main": "src/index.mjs",
   "module": "src/index.mjs",
   "type": "module",
+  "engines": {
+    "node": ">=12.2.0"
+  },
   "scripts": {
     "start": "t -p",
     "format": "f -w --exclude docs",
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "@magic-modules/git-badges": "github:magic-modules/git-badges",
+    "@magic-modules/light-switch": "github:magic-modules/light-switch",
     "@magic-themes/docs": "github:magic-themes/docs",
     "@magic/core": "github:magic/core",
     "@magic/test": "0.1.9"
