@@ -2,40 +2,23 @@ export const View = props => {
   if (typeof props === 'string') {
     props = {
       content: props,
-      theme: 'light',
-      // fixed: !!props.theme,
     }
   }
 
   CHECK_PROPS(props, propTypes, 'Pre')
 
-  const { theme, content /*, fixed*/ } = props
+  const { content } = props
 
-  return div({ class: `Pre ${theme}` }, [
+  return div({ class: 'Pre' }, [
     div({ class: 'menu' }, [
-      // has to be disabled until we added subscription to theme changes
-      // !fixed &&
-      //   button({ onclick: [actions.pre.changeTheme] }, theme === 'dark' ? 'light' : 'dark'),
       button({ onclick: [actions.pre.clip, e => ({ e, content })] }, 'copy'),
     ]),
     pre(lib.pre.format(content)),
   ])
 }
 
-export const state = {
-  theme: 'light',
-}
-
 export const actions = {
   pre: {
-    // changeTheme: state => {
-    //   const pre = state.pre
-    //   pre.theme = state.theme === 'dark' ? 'light' : 'dark'
-    //   return {
-    //     ...state,
-    //     pre,
-    //   }
-    // },
     clip: (state, { content }) => {
       if (typeof document !== 'undefined' && typeof document.execCommand === 'function') {
         const copy = document.createElement('textarea')
@@ -57,6 +40,7 @@ export const actions = {
 export const style = {
   border: '1px solid #666',
   borderRadius: '5px',
+  counterReset: 'line',
   display: 'block',
   fontFamily: 'monospace',
   margin: '1em 0',
@@ -64,8 +48,6 @@ export const style = {
   padding: '1em .5em 0 .2em',
   position: 'relative',
   whiteSpace: 'pre',
-
-  counterReset: 'line',
 
   pre: {
     overflowX: 'auto',
@@ -104,8 +86,9 @@ export const style = {
     border: '0 none',
   },
 
-  '&.light': {
-    backgroundColor: '#eee',
+  '.light&&': {
+    backgroundColor: '#ddd',
+    color: '#111',
 
     '> code:before': {
       color: '#666',
@@ -155,57 +138,56 @@ export const style = {
     },
   },
 
-  '&.dark': {
-    backgroundColor: '#222',
-    color: '#eee',
+  backgroundColor: '#121212',
+  color: '#eee',
+  transition: 'color 300ms, background-color 300ms',
 
-    '> code:before': {
-      color: '#666',
-    },
-    '.html': {
-      color: '#008800',
-    },
-    '.keyword': {
-      color: 'violet',
-    },
-    '.builtin': {
-      color: 'cadetblue',
-    },
-    '.string': {
-      color: '#dd8f00',
-    },
-    '.colon': {
-      color: '#8eef8e',
-    },
-    '.boolean': {
-      color: '#7979e4',
-    },
-    '.actions': {
-      color: 'blueviolet',
-    },
-    '.state': {
-      color: 'cornflowerblue',
-    },
-    '.comment': {
-      opacity: '0.7',
-      fontStyle: 'italic',
-    },
-    '.object': {
-      color: '#00ff00',
-    },
-    '.property': {
-      color: '#8eef8e',
-    },
-    a: {
-      color: 'turquoise',
+  '> code:before': {
+    color: '#666',
+  },
+  '.html': {
+    color: '#008800',
+  },
+  '.keyword': {
+    color: 'violet',
+  },
+  '.builtin': {
+    color: 'cadetblue',
+  },
+  '.string': {
+    color: '#dd8f00',
+  },
+  '.colon': {
+    color: '#8eef8e',
+  },
+  '.boolean': {
+    color: '#7979e4',
+  },
+  '.actions': {
+    color: 'blueviolet',
+  },
+  '.state': {
+    color: 'cornflowerblue',
+  },
+  '.comment': {
+    opacity: '0.7',
+    fontStyle: 'italic',
+  },
+  '.object': {
+    color: '#00ff00',
+  },
+  '.property': {
+    color: '#8eef8e',
+  },
+  a: {
+    color: 'turquoise',
 
-      '&:hover': {
-        color: '#d15100',
-      },
+    '&:hover': {
+      color: '#d15100',
     },
   },
 }
 
 export const propTypes = {
-  Pre: [{ key: 'content', type: 'string' }, { key: 'theme', type: 'string' }],
+  Pre: [{ key: 'content', type: 'string' }],
 }
