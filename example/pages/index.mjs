@@ -14,7 +14,8 @@ export const View = state => [
 
   h2({ id: 'usage' }, 'usage:'),
   p('in a page/component, just pass some string that looks like js'),
-  Pre("module.exports = {\n  View: () => Pre('const js = true'),\n}"),
+  Pre(`export const View = () => Pre('const js = true')`),
+
   p('renders'),
   Pre('const js = true'),
 
