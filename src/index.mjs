@@ -189,5 +189,5 @@ export const style = {
 }
 
 export const propTypes = {
-  Pre: [{ key: 'content', type: 'string' }],
+  Pre: [{ key: 'content', type: 'string', max: Number.MAX_SAFE_INTEGER }],
 }
