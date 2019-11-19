@@ -35,7 +35,7 @@
     "@magic-modules/light-switch": "github:magic-modules/light-switch",
     "@magic-themes/docs": "github:magic-themes/docs",
     "@magic/core": "github:magic/core",
-    "@magic/test": "0.1.14"
+    "@magic/test": "0.1.19"
   },
   "keywords": [
     "syntax",
