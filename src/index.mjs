@@ -1,15 +1,25 @@
-export const View = props => {
+export const View = (props, str) => {
   if (typeof props === 'string') {
     props = {
       content: props,
+    }
+  } else if (str) {
+    props = {
+      content: str,
+      ...props,
     }
   }
 
   CHECK_PROPS(props, propTypes, 'Pre')
 
-  const { content } = props
+  const { content, lines = true } = props
 
-  return div({ class: 'Pre' }, [
+  let classes = {
+    Pre: true,
+    lines,
+  }
+
+  return div({ class: classes }, [
     div({ class: 'menu' }, [
       button({ onclick: [actions.pre.clip, e => ({ e, content })] }, 'copy'),
     ]),
@@ -49,26 +59,42 @@ export const style = {
   position: 'relative',
   whiteSpace: 'pre',
 
+  '&.lines': {
+    pre: {
+      '> code': {
+        counterIncrement: 'line',
+        padding: 0,
+
+        '&:last-child': {
+          padding: '0 0 1em',
+        },
+
+        '&:before': {
+          content: 'counter(line)',
+          display: 'inline-block',
+          padding: '0 .5em 0 0',
+          textAlign: 'right',
+          userSelect: 'none',
+          width: '3ch',
+        },
+      },
+    },
+  },
+
   pre: {
     overflowX: 'auto',
 
     '> code': {
-      counterIncrement: 'line',
       display: 'block',
 
-      '&:before': {
-        content: 'counter(line)',
-        display: 'inline-block',
-        padding: '0 .5em 0 0',
-        textAlign: 'right',
-        userSelect: 'none',
-        width: '3ch',
-      },
+      padding: '0 1em 0',
 
       '&:last-child': {
-        padding: '0 0 1em',
+        padding: '0 1em 1em',
       },
     },
+
+
   },
 
   '.menu': {
@@ -189,5 +215,8 @@ export const style = {
 }
 
 export const propTypes = {
-  Pre: [{ key: 'content', type: 'string', max: Number.MAX_SAFE_INTEGER }],
+  Pre: [
+    { key: 'content', type: 'string', max: Number.MAX_SAFE_INTEGER },
+    { key: 'lines', type: 'boolean', default: true },
+  ],
 }
