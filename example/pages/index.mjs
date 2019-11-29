@@ -67,6 +67,10 @@ export const View = state => [
 const v = "t" // comment https://jaeh.at
 // and in a comment starting the line https://wizardsatwork.at`),
 
+  p('Without line numbers'),
+  Pre('Pre({ lines: false }, "String to highlight\\nwithout\\nline\\nnumbers")'),
+  Pre({ lines: false }, "String to highlight\nwithout\nline\nnumbers"),
+
   h2({ id: 'source' }, 'source'),
   p([
     'the source for this page is in the ',
