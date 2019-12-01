@@ -12,8 +12,8 @@ syntax highlighting for [@magic](https://magic.github.io/core)
 
 [npm-image]: https://img.shields.io/npm/v/@magic-modules/pre.svg
 [npm-url]: https://www.npmjs.com/package/@magic-modules/pre
-[travis-image]: https://api.travis-ci.org/magic-modules/pre.svg?branch=master
-[travis-url]: https://travis-ci.org/magic-modules/pre
+[travis-image]: https://img.shields.io/travis/com/magic-modules/pre/master
+[travis-url]: https://travis-ci.com/magic-modules/pre
 [appveyor-image]: https://img.shields.io/appveyor/ci/magicmodules/pre/master.svg
 [appveyor-url]: https://ci.appveyor.com/project/magicmodules/pre/branch/master
 [coveralls-image]: https://coveralls.io/repos/github/magic-modules/pre/badge.svg
