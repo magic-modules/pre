@@ -35,3 +35,10 @@ const component = {
   View: () => Pre('const name = true')
 }
 ```
+
+#### changelog
+##### 0.0.1
+first commit
+
+##### 0.0.2
+use @magic npm org for installs, instead of github
