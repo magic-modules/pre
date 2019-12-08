@@ -39,10 +39,12 @@
     "@magic/test": "0.1.23"
   },
   "keywords": [
-    "syntax",
     "magic",
+    "magic-module",
     "pre",
-    "component"
+    "hyperapp",
+    "syntax",
+    "highlighting"
   ],
   "contributors": [
     {
