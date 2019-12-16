@@ -24,7 +24,7 @@ export const View = state => [
   p([
     'the @magic-modules/',
     Link({ to: 'https://github.com/magic-modules/light-switch' }, 'light-switch'),
-    ' module allows users to toggle dark/light modes.',
+    ' module allows users to toggle dark/light modes, which will also recolor pre to match.',
   ]),
 
   h2({ id: 'syntax' }, 'syntax'),
