@@ -41,4 +41,7 @@ const component = {
 first commit
 
 ##### 0.0.2
-use @magic npm org for installs, instead of github
+use @magic npm org for dependency installs, instead of github
+
+##### 0.0.3 - unreleased
+...
