@@ -44,4 +44,7 @@ first commit
 use @magic npm org for dependency installs, instead of github
 
 ##### 0.0.3 - unreleased
+require node 13.5.0
+
+##### 0.0.4 - unreleased
 ...
