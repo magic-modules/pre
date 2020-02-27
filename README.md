@@ -43,8 +43,9 @@ first commit
 ##### 0.0.2
 use @magic npm org for dependency installs, instead of github
 
-##### 0.0.3 - unreleased
-require node 13.5.0
+##### 0.0.3
+* require node 13.5.0
+* except array as input
 
 ##### 0.0.4 - unreleased
 ...
