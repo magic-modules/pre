@@ -8,6 +8,10 @@ export const View = (props, str) => {
       content: str,
       ...props,
     }
+  } else if (Array.isArray(props)) {
+    props = {
+      content: props.join('')
+    }
   }
 
   CHECK_PROPS(props, propTypes, 'Pre')
