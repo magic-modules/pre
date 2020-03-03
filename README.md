@@ -50,5 +50,8 @@ use @magic npm org for dependency installs, instead of github
 ##### 0.0.4
 better string, comment and link handling.
 
-##### 0.0.5 - unreleased
+##### 0.0.5
+fix comment indents
+
+#### 0.0.6 - unreleased
 ...
