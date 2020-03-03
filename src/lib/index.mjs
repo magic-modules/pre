@@ -187,12 +187,8 @@ export const wordsByLine = line => {
 
   if (end && end.trim()) {
     const indentIdx = line.search(/\S|$/)
-    let indent = ''
-    for (let i = 0; i < indentIdx; i++) {
-      indent += ' '
-    }
 
-    end = span({ class: 'comment' }, [indent, '//', wrapLinks(end)])
+    end = span({ class: 'comment' }, ['//', wrapLinks(end)])
   }
 
   return [start, end]
