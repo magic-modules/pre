@@ -4,5 +4,5 @@ export default {
   URL: 'magic-modules.github.io/pre',
   PUBLIC: 'docs',
   THEME: 'docs',
-  HOIST: 'Gdpr',
+  HOIST: ['LightSwitch', 'Gdpr'],
 }
