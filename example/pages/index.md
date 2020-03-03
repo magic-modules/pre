@@ -85,6 +85,16 @@ numbers
 
 <Pre lines="false">String to highlight\nwithout\nline\nnumbers</Pre>
 
+# comments with indent
+
+comments can be indented:
+
+```
+// no indent
+  // 2 spaces
+    // 4 spaces
+```
+
 ## source
 
 the source for this page is in the
