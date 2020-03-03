@@ -16,11 +16,11 @@ export const View = (props, str) => {
 
   CHECK_PROPS(props, propTypes, 'Pre')
 
-  const { content, lines = true } = props
+  let { content, lines = true } = props
 
   let classes = {
     Pre: true,
-    lines,
+    lines: !lines || lines !== 'false',
   }
 
   return div({ class: classes }, [
@@ -221,6 +221,6 @@ export const style = {
 export const propTypes = {
   Pre: [
     { key: 'content', type: 'string', max: Number.MAX_SAFE_INTEGER },
-    { key: 'lines', type: 'boolean', default: true },
+    { key: 'lines', type: ['boolean', 'string'], default: true },
   ],
 }
