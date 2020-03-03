@@ -10,16 +10,43 @@ ${description}
 
 ## installation
 
-<Pre>npm install @magic-modules/pre</Pre>
+```npm install @magic-modules/pre```
 
 ## usage
 
-in a page/component, just pass some string that looks like js'),
-  Pre(`export const View = () => Pre('const js = true')`),
+in a page/component, just pass some string to the markdown code component:
+
+```
+\`\`\`
+export const View = () => Pre('const js = true')
+\`\`\`
+```
 
 renders
 
-<Pre>const js = true</Pre>
+```const js = true```
+
+alternatively, the &lt;Pre> component can be used:
+```
+<Pre>
+export const View = () => Pre('const js = true')
+</Pre>
+```
+
+renders
+
+<Pre>
+export const View = () => Pre('const js = true')
+</Pre>
+
+single line code also works:
+
+<Pre>\`one line of code\`</Pre>
+
+renders
+
+`one line of code`
+
 
 ## themes
 
@@ -35,7 +62,7 @@ the @magic-modules/[light-switch](https://github.com/magic-modules/light-switch)
 Pre can handle single line comments starting with: //.
 Multiline comments are on the todo list.
 
-<Pre>const v = "t" // single line comment</Pre>
+```const v = "t" // single line comment```
 
 ### #syntax- urls
 
@@ -43,11 +70,11 @@ Pre can handle urls even though they look like comments.
 Those urls will even turn into Link elements.
 Urls are identified by containing the three characters ://
 
-<Pre>https://jaeh.at</Pre>
+```https://jaeh.at```
 
 Pre even handles links in comments and strings
 
-<Pre>before comment // comment http://link.in.comment</Pre>
+```before comment // comment http://link.in.comment```
 
 ### #syntax- emails
 
@@ -61,29 +88,33 @@ if you actually do need support for name@local, please file an issue.
 
 ### examples
 
-<Pre>mail@jaeh.at</Pre>
+```mail@jaeh.at```
 
-<Pre>mailto:mail@jaeh.at</Pre>
+```mailto:mail@jaeh.at```
 
 link in a comment:
 
-<Pre>
+```
 const v = "t" // comment https://jaeh.at
 // and in a comment starting the line https://wizardsatwork.at
-</Pre>
+```
 
 Without line numbers
 
-<Pre>
-&lt;Pre lines="false">
+```
+<Pre lines="false">
 String to highlight
 without
 line
 numbers
-&lt;/Pre>
-</Pre>
+```
 
-<Pre lines="false">String to highlight\nwithout\nline\nnumbers</Pre>
+<Pre lines="false">
+String to highlight
+without
+line
+numbers
+</Pre>
 
 # comments with indent
 
