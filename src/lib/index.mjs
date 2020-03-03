@@ -119,21 +119,16 @@ export const wrapEmails = line =>
     return wrapWords(part)
   })
 
-export const wrapComments = (line, i) => [
-  wordsByLine(line.substring(0, i)),
-  wordsByLine(line.substring(i)),
-]
-
 export const wrapLinks = line =>
   line
-    .split(/(?= )/)
+    .split(' ')
     .map(word => {
       if (!word.includes('://')) {
-        return wordsByLine(word)
+        return wordsByLine(word + ' ')
       }
 
       const [protocol, url] = word.split('://')
-      if (protocol.match(/[a-z]/g)) {
+      if (!protocol.match(/[a-z]/g)) {
         return word
       }
 
@@ -149,47 +144,58 @@ const wrapUrls = line => {
 }
 
 export const wrapStrings = line => {
-  const cleaned = line.replace(/"/g, "'")
-  const [start, str, ...rest] = cleaned.split("'")
-  let end = rest
-  if (end.length === 1) {
-    end = wordsByLine(end[0])
-  } else if (end.length > 1) {
-    end = wordsByLine(end.join("'"))
+  const regex = /("|'|`)(.*?)\1/gim
+
+  const assembled = []
+
+  let rest = line
+
+  line.replace(regex, (match, del, a, b, c) => {
+    const [before, after] = rest.split(match)
+    assembled.push(wrapUrls(before))
+    assembled.push(span({ class: 'string' }, wrapUrls(match)))
+
+    rest = after
+  })
+
+  assembled.push(wrapUrls(rest))
+
+  if (rest === line) {
+    return wrapWords(wrapUrls(line))
   }
 
-  let words = []
-  if (typeof str !== 'undefined') {
-    words = [wrapWords(start), span({ class: 'string' }, ["'", wrapUrls(str), "'"]), end]
-  } else {
-    words = wrapWords(line)
-  }
-  return words
+  return assembled.map(ass => {
+    if (typeof ass === 'string') {
+      return wordsByLine(ass)
+    } else {
+      return ass
+    }
+  })
 }
 
 export const wordsByLine = line => {
   const idx = line.indexOf('//')
   const trimmed = line.trim()
-  if (trimmed.startsWith('//')) {
+
+  let [start, ...end] = line.split(/\/\//g)
+
+  end = end.join('//')
+
+  if (start && start.trim()) {
+    start = wrapStrings(start)
+  }
+
+  if (end && end.trim()) {
     const indentIdx = line.search(/\S|$/)
     let indent = ''
     for (let i = 0; i < indentIdx; i++) {
       indent += ' '
     }
-    if (!trimmed.startsWith('// ')) {
-      line = `${indent}// ${trimmed.substr(2)}`
-    }
 
-    return span({ class: 'comment' }, [indent, '// ', wordsByLine(trimmed.substring(3))])
-  } else if (idx > -1 && line[idx - 1] !== ':') {
-    return wrapComments(line, idx)
-  } else if (line.indexOf('://') > 2) {
-    return wrapLinks(line)
-  } else if (line.indexOf('@') && line.includes('.') && !line.trim().includes(' ')) {
-    return wrapEmails(line)
+    end = span({ class: 'comment' }, [indent, '//', wrapLinks(end)])
   }
 
-  return wrapStrings(line)
+  return [start, end]
 }
 
 export const wrapLine = line => code({ class: 'line' }, wordsByLine(line))
