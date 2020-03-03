@@ -47,5 +47,8 @@ use @magic npm org for dependency installs, instead of github
 * require node 13.5.0
 * except array as input
 
-##### 0.0.4 - unreleased
+##### 0.0.4
+better string, comment and link handling.
+
+##### 0.0.5 - unreleased
 ...
