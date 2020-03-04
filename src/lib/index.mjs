@@ -174,7 +174,6 @@ export const wrapStrings = line => {
 }
 
 export const wordsByLine = line => {
-  const idx = line.indexOf('//')
   const trimmed = line.trim()
 
   let [start, ...end] = line.split(/\/\//g)
