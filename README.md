@@ -53,5 +53,8 @@ better string, comment and link handling.
 ##### 0.0.5
 fix comment indents
 
-#### 0.0.6 - unreleased
+#### 0.0.6
+cleanup.
+
+#### 0.0.7 - unreleased
 ...
