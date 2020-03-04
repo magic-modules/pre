@@ -120,20 +120,18 @@ export const wrapEmails = line =>
   })
 
 export const wrapLinks = line =>
-  line
-    .split(' ')
-    .map(word => {
-      if (!word.includes('://')) {
-        return wordsByLine(word + ' ')
-      }
+  line.split(' ').map(word => {
+    if (!word.includes('://')) {
+      return wordsByLine(word + ' ')
+    }
 
-      const [protocol, url] = word.split('://')
-      if (!protocol.match(/[a-z]/g)) {
-        return word
-      }
+    const [protocol, url] = word.split('://')
+    if (!protocol.match(/[a-z]/g)) {
+      return word
+    }
 
-      return Link({ to: word }, word)
-    })
+    return Link({ to: word }, word)
+  })
 
 const wrapUrls = line => {
   if (line.includes('://') && !line.includes('@')) {

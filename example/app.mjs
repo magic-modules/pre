@@ -9,7 +9,10 @@ export const state = {
     {
       to: '/#syntax',
       text: 'syntax',
-      items: [{ to: '/#syntax-comments', text: 'comments' }, { to: '/#syntax-urls', text: 'urls' }],
+      items: [
+        { to: '/#syntax-comments', text: 'comments' },
+        { to: '/#syntax-urls', text: 'urls' },
+      ],
     },
     { to: '/#source', text: 'source' },
   ],

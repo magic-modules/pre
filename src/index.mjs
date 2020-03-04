@@ -10,7 +10,7 @@ export const View = (props, str) => {
     }
   } else if (Array.isArray(props)) {
     props = {
-      content: props.join('')
+      content: props.join(''),
     }
   }
 
@@ -97,8 +97,6 @@ export const style = {
         padding: '0 1em 1em',
       },
     },
-
-
   },
 
   '.menu': {
