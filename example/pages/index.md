@@ -10,34 +10,22 @@ ${description}
 
 ## installation
 
-```npm install @magic-modules/pre```
+`npm install @magic-modules/pre`
 
 ## usage
 
 in a page/component, just pass some string to the markdown code component:
 
 ```
-\`\`\`
+\\\`\\\`\\\`
 export const View = () => Pre('const js = true')
-\`\`\`
+\\\`\\\`\\\`
 ```
 
 renders
 
 ```const js = true```
 
-alternatively, the &lt;Pre> component can be used:
-```
-<Pre>
-export const View = () => Pre('const js = true')
-</Pre>
-```
-
-renders
-
-<Pre>
-export const View = () => Pre('const js = true')
-</Pre>
 
 single line code also works:
 
@@ -102,11 +90,12 @@ const v = "t" // comment https://jaeh.at
 Without line numbers
 
 ```
-<Pre lines="false">
+&lt;Pre lines="false">
 String to highlight
 without
 line
 numbers
+&lt;/Pre>
 ```
 
 <Pre lines="false">
