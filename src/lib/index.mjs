@@ -134,6 +134,10 @@ export const wrapLinks = line =>
   })
 
 const wrapUrls = line => {
+  if (!line) {
+    return line
+  }
+
   if (line.includes('://') && !line.includes('@')) {
     return wrapLinks(line)
   } else {
@@ -185,7 +189,7 @@ export const wordsByLine = line => {
   if (end && end.trim()) {
     const indentIdx = line.search(/\S|$/)
 
-    end = span({ class: 'comment' }, ['//', wrapLinks(end)])
+    end = span({ class: 'comment' }, ['//', wrapUrls(end)])
   }
 
   return [start, end]
