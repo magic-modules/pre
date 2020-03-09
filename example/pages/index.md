@@ -14,34 +14,59 @@ ${description}
 
 ## usage
 
+### multi line
+
 in a page/component, just pass some string to the markdown code component:
 
 ```
-\\\`\\\`\\\`
-export const View = () => Pre('const js = true')
-\\\`\\\`\\\`
+\`\`\`
+const foo = bar => {
+  console.log(bar)
+}
+\`\`\`
 ```
 
 renders
 
-```const js = true```
+```
+const foo = bar => {
+  console.log(bar)
+}
+```
 
 
-single line code also works:
+### single lines
 
-<Pre>\`one line of code\`</Pre>
+single line code blocks work:
+
+<Pre lines="false">`one line of code`</Pre>
 
 renders
 
 `one line of code`
 
 
+### native module
+
+if the string passed to Pre has to include a \`, the &lt;Pre> module can be used directly:
+
+#### single line
+
+<Pre lines="false">&lt;Pre lines="false">`line of code`&lt;Pre></Pre>
+
+renders
+
+<Pre lines="false">`line of code`</Pre>
+
 ## themes
 
 pre supports two color themes. It will automatically adapt to the global theme settings.
 
 the @magic-modules/[light-switch](https://github.com/magic-modules/light-switch)
- module allows users to toggle dark/light modes, which will also recolor pre to match.
+module allows users to toggle dark/light modes, which will also recolor pre to match.
+
+if you have javascript activated,
+just click the small lightbulb in the top right corner of this page to test this.
 
 ## syntax
 
@@ -113,6 +138,61 @@ comments can be indented:
 // no indent
   // 2 spaces
     // 4 spaces
+```
+
+
+#### multiline
+
+multiline strings and comments currently do not get handled
+
+```
+&lt;Pre>
+\`
+Multiline
+string
+\`
+
+\`
+Second
+Multiline
+String
+\`
+&lt;/Pre>
+```
+
+renders
+
+<Pre>
+\`
+Multiline
+string.
+\`
+
+\`
+Second
+Multiline
+String
+\`
+</Pre>
+
+multiline comments
+
+<Pre>
+\`\`\`
+/*
+multiline
+comments
+\*/
+\`\`\`
+</Pre>
+
+renders
+
+```
+/*
+multiline
+comments
+*/
 ```
 
 ## source
