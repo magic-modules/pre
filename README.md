@@ -56,5 +56,10 @@ fix comment indents
 #### 0.0.6
 cleanup.
 
-#### 0.0.7 - unreleased
+#### 0.0.7
+* do not error on empty lines
+* convert to Modules, no more lib functions.
+* lib now exports keywords, builtins, booleans, regexes
+
+#### 0.0.8 - unreleased
 ...
