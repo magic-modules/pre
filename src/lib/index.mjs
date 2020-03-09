@@ -17,6 +17,8 @@ else delete null public var
 await byte finally catch
 in return for get const char
 module exports require
+
+npm install =>
 `
   .trim()
   .split(/\b/g)
@@ -39,168 +41,9 @@ Float32Array Float64Array
 
 export const booleans = ['true', 'false']
 
-// const known = '[object HTMLDivElement]'
-// const tags = {
-//   canvas: 1,
-//   video: 1,
-// }
+export const commentRegex = /(\/\/)/gim
+export const wordRegex = /( )/gim
+export const stringRegex = /("|')(.*?)\1/gim
 
-// const isHtmlTag = word => {
-//   if (tags.hasOwnProperty(word)) {
-//     return true
-//   } else {
-//     try {
-//       const ele =
-//         typeof global !== 'undefined'
-//           ? Object.keys(app.dependencies).includes(word)
-//           : document.createElement(word).toString() === known
 
-//       if (ele) {
-//         tags[word] = true
-//         return true
-//       }
-//     } catch (e) {}
-//   }
-// }
-
-export const wrapWords = string => {
-  if (typeof string !== 'string') {
-    return string
-  }
-
-  const matched = string.split(/\b/)
-
-  string = matched.map((word, i) => {
-    if (word === '') {
-      return
-    }
-
-    let cl = ''
-    if (word === 'state') {
-      cl = 'state'
-    } else if (word === 'actions') {
-      cl = 'actions'
-    } else if (matched[i + 1] && matched[i + 1].includes(':')) {
-      cl = 'colon'
-      // } else if (isHtmlTag(word)) {
-      //   cl = 'html'
-    } else if (keywords.includes(word)) {
-      cl = 'keyword'
-    } else if (builtins.includes(word)) {
-      cl = 'builtin'
-    } else if (booleans.includes(word)) {
-      cl = 'boolean'
-    } else if (matched[i - 1] === '.') {
-      cl = 'property'
-    } else if (matched[i + 1] === '.') {
-      cl = 'object'
-    }
-
-    if (cl) {
-      word = span({ class: cl }, word)
-    }
-
-    return word
-  })
-
-  return string
-}
-
-export const mailRegex = /([a-zA-Z0-9:+._-]+@[a-zA-Z0-9._-]+)/g
-
-export const wrapEmails = line =>
-  line.split(mailRegex).map(part => {
-    if (mailRegex.test(part)) {
-      const to = part.startsWith('mailto:') ? part : `mailto:${part}`
-      const text = part.replace('mailto:', '')
-      return Link({ class: 'email', to }, text)
-    }
-
-    return wrapWords(part)
-  })
-
-export const wrapLinks = line =>
-  line.split(' ').map(word => {
-    if (!word.includes('://')) {
-      return wordsByLine(word + ' ')
-    }
-
-    const [protocol, url] = word.split('://')
-    if (!protocol.match(/[a-z]/g)) {
-      return word
-    }
-
-    return Link({ to: word }, word)
-  })
-
-const wrapUrls = line => {
-  if (!line) {
-    return line
-  }
-
-  if (line.includes('://') && !line.includes('@')) {
-    return wrapLinks(line)
-  } else {
-    return wrapEmails(line)
-  }
-}
-
-export const wrapStrings = line => {
-  const regex = /("|'|`)(.*?)\1/gim
-
-  const assembled = []
-
-  let rest = line
-
-  line.replace(regex, (match, del, a, b, c) => {
-    const [before, after] = rest.split(match)
-    assembled.push(wrapUrls(before))
-    assembled.push(span({ class: 'string' }, wrapUrls(match)))
-
-    rest = after
-  })
-
-  assembled.push(wrapUrls(rest))
-
-  if (rest === line) {
-    return wrapWords(wrapUrls(line))
-  }
-
-  return assembled.map(ass => {
-    if (typeof ass === 'string') {
-      return wordsByLine(ass)
-    } else {
-      return ass
-    }
-  })
-}
-
-export const wordsByLine = line => {
-  const trimmed = line.trim()
-
-  let [start, ...end] = line.split(/\/\//g)
-
-  end = end.join('//')
-
-  if (start && start.trim()) {
-    start = wrapStrings(start)
-  }
-
-  if (end && end.trim()) {
-    const indentIdx = line.search(/\S|$/)
-
-    end = span({ class: 'comment' }, ['//', wrapUrls(end)])
-  }
-
-  return [start, end]
-}
-
-export const wrapLine = line => code({ class: 'line' }, wordsByLine(line))
-
-export const format = content =>
-  content
-    .trim()
-    .split('\n')
-    .map(wrapLine)
-
-export default { format }
+export default { keywords, builtins, booleans, commentRegex, wordRegex, stringRegex }

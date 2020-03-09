@@ -27,9 +27,90 @@ export const View = (props, str) => {
     div({ class: 'menu' }, [
       button({ onclick: [actions.pre.clip, e => ({ e, content })] }, 'copy'),
     ]),
-    pre(lib.pre.format(content)),
+
+    pre(
+      content
+        .trim()
+        .split('\n')
+        .map(Pre.Line),
+    ),
   ])
 }
+
+export const Line = line => code({ class: 'line' }, Pre.Words(line))
+
+export const Words = line => {
+  let [before, ...after] = line.split(lib.pre.commentRegex)
+
+  const isComment = !before.endsWith(':') && after.length
+
+  if (isComment) {
+    return [
+      Pre.Words(before),
+      Pre.Comment(
+        after
+          .join('')
+          .split(lib.pre.wordRegex)
+          .map(Pre.Word),
+      ),
+    ]
+  }
+
+  const assembled = []
+
+  let rest = line
+
+  line.replace(lib.pre.stringRegex, match => {
+    const [before, after] = rest.split(match)
+    assembled.push(before.split(lib.pre.wordRegex).map(Pre.Word))
+    assembled.push(span({ class: 'string' }, match))
+
+    rest = after
+  })
+
+  if (rest !== line) {
+    assembled.push(rest.split(lib.pre.wordRegex).map(Pre.Word))
+    return assembled
+  }
+
+  const words = line.split(lib.pre.wordRegex)
+  return words.map(Pre.Word)
+}
+
+export const Word = word => {
+  if (!word) {
+    return ''
+  }
+
+  const isHttpUrl = word.includes('://')
+  const isEmail = word.startsWith('mailto:') || (word.includes('@') && word.includes('.'))
+
+  if (isHttpUrl || isEmail) {
+    return Link({ to: word, text: word })
+  }
+
+  let cl = ''
+
+  if (word === 'state') {
+    cl = 'state'
+  } else if (word === 'actions') {
+    cl = 'actions'
+  } else if (lib.pre.keywords.includes(word)) {
+    cl = 'keyword'
+  } else if (lib.pre.builtins.includes(word)) {
+    cl = 'builtin'
+  } else if (lib.pre.booleans.includes(word)) {
+    cl = 'boolean'
+  }
+
+  if (cl) {
+    return span({ class: cl }, word)
+  }
+
+  return word
+}
+
+export const Comment = string => span({ class: 'comment' }, string)
 
 export const actions = {
   pre: {
@@ -221,4 +302,11 @@ export const propTypes = {
     { key: 'content', type: 'string', max: Number.MAX_SAFE_INTEGER },
     { key: 'lines', type: ['boolean', 'string'], default: true },
   ],
+}
+
+const Pre = {
+  Line,
+  Words,
+  Word,
+  Comment,
 }
