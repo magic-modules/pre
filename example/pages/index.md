@@ -6,7 +6,7 @@ Pre component.
 
 ${description}
 
-<GitBadges>magic-modules/pre</GitBadges>
+<GitBadges>@magic-modules/pre</GitBadges>
 
 ## installation
 
