@@ -61,5 +61,9 @@ cleanup.
 * convert to Modules, no more lib functions.
 * lib now exports keywords, builtins, booleans, regexes
 
-#### 0.0.8 - unreleased
+#### 0.0.8
+* bump required node version to 14.2.0
+* no empty strings in keywords and builtins
+
+#### 0.0.9 - unreleased
 ...
