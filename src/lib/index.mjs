@@ -23,6 +23,7 @@ npm install =>
   .trim()
   .split(/\b/g)
   .map(w => w.trim())
+  .filter(a => a)
 
 export const builtins = `
 Array Object String Number RegExp Null Symbol
@@ -38,6 +39,7 @@ Float32Array Float64Array
   .trim()
   .split(/\b/g)
   .map(w => w.trim())
+  .filter(a => a)
 
 export const booleans = ['true', 'false']
 
