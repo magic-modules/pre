@@ -143,6 +143,7 @@ export const style = {
   padding: '1em .5em 0 .2em',
   position: 'relative',
   whiteSpace: 'pre',
+  textAlign: 'left',
 
   '&.lines': {
     pre: {
