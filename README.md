@@ -65,5 +65,8 @@ cleanup.
 * bump required node version to 14.2.0
 * no empty strings in keywords and builtins
 
-#### 0.0.9 - unreleased
+#### 0.0.9
+always textAlign: left
+
+#### 0.0.10 - unreleased
 ...
