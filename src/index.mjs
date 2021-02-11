@@ -68,7 +68,7 @@ export const Words = line => {
     rest = after
   })
 
-  if (rest !== line) {
+  if (rest && rest !== line) {
     assembled.push(rest.split(lib.pre.wordRegex).map(Pre.Word))
     return assembled
   }
