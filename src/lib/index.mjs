@@ -47,5 +47,4 @@ export const commentRegex = /(\/\/)/gim
 export const wordRegex = /( )/gim
 export const stringRegex = /("|')(.*?)\1/gim
 
-
 export default { keywords, builtins, booleans, commentRegex, wordRegex, stringRegex }
