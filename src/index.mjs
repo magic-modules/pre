@@ -51,7 +51,7 @@ export const Words = line => {
         after
           .join('')
           .split(lib.pre.wordRegex)
-          .map(Pre.Word),
+          .map(Pre.Word)
       ),
     ]
   }
@@ -61,15 +61,28 @@ export const Words = line => {
   let rest = line
 
   line.replace(lib.pre.stringRegex, match => {
-    const [before, after] = rest.split(match)
-    assembled.push(before.split(lib.pre.wordRegex).map(Pre.Word))
-    assembled.push(span({ class: 'string' }, match))
+    if (rest) {
+      const [before, after] = rest.split(match)
 
-    rest = after
+      if (before) {
+        assembled.push(
+          before
+            .split(lib.pre.wordRegex)
+            .map(Pre.Word)
+            .filter(a => a),
+        )
+      }
+
+      rest = after
+    }
+
+    assembled.push(span({ class: 'string' }, match))
   })
 
-  if (rest && rest !== line) {
-    assembled.push(rest.split(lib.pre.wordRegex).map(Pre.Word))
+  if (rest !== line) {
+    if (rest) {
+      assembled.push(rest.split(lib.pre.wordRegex).map(Pre.Word))
+    }
     return assembled
   }
 
