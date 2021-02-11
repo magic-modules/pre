@@ -71,5 +71,10 @@ always textAlign: left
 #### 0.0.10 
 bump required node version to 14.15.4
 
-##### 0.0.11 - unreleased
+##### 0.0.11
+* update dependencies
+* test html
+* handle multiple strings in one line
+
+##### 0.0.12 - unreleased
 ...
