@@ -81,12 +81,12 @@ export const Words = line => {
 
   if (rest !== line) {
     if (rest) {
-      assembled.push(rest.split(lib.pre.wordRegex).map(Pre.Word))
+      assembled.push(rest.split(lib.pre.wordRegex).map(Pre.Word).filter(a => a))
     }
     return assembled
   }
 
-  const words = line.split(lib.pre.wordRegex)
+  const words = line.split(lib.pre.wordRegex).filter(a => a)
   return words.map(Pre.Word)
 }
 
