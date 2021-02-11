@@ -28,12 +28,7 @@ export const View = (props, str) => {
       button({ onclick: [actions.pre.clip, e => ({ e, content })] }, 'copy'),
     ]),
 
-    pre(
-      content
-        .trim()
-        .split('\n')
-        .map(Pre.Line),
-    ),
+    pre(content.trim().split('\n').map(Pre.Line)),
   ])
 }
 
@@ -45,15 +40,7 @@ export const Words = line => {
   const isComment = !before.endsWith(':') && after.length
 
   if (isComment) {
-    return [
-      Pre.Words(before),
-      Pre.Comment(
-        after
-          .join('')
-          .split(lib.pre.wordRegex)
-          .map(Pre.Word)
-      ),
-    ]
+    return [Pre.Words(before), Pre.Comment(after.join('').split(lib.pre.wordRegex).map(Pre.Word))]
   }
 
   const assembled = []
@@ -81,8 +68,14 @@ export const Words = line => {
 
   if (rest !== line) {
     if (rest) {
-      assembled.push(rest.split(lib.pre.wordRegex).map(Pre.Word).filter(a => a))
+      assembled.push(
+        rest
+          .split(lib.pre.wordRegex)
+          .map(Pre.Word)
+          .filter(a => a),
+      )
     }
+
     return assembled
   }
 
