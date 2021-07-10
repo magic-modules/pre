@@ -76,5 +76,9 @@ bump required node version to 14.15.4
 * test html
 * handle multiple strings in one line
 
-##### 0.0.12 - unreleased
+##### 0.0.12 
+* change some styles
+* handle lines config parameter correctly
+
+##### 0.0.13 - unreleased
 ...
