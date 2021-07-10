@@ -21,7 +21,12 @@ export const View = ({ title, description }) => [
 
   p('in a page / component, just pass some string to the markdown code component:'),
 
-  Pre(['Pre(`', 'const foo = bar => {', '  console.log(bar)', '}', '`)']),
+  Pre(`
+Pre(\`
+const foo = bar => {
+  console.log(bar)
+}
+\`)`),
 
   p('renders'),
 
@@ -47,11 +52,11 @@ const foo = bar => {
 
   p([
     'the @magic-modules/[light-switch](https://github.com/magic-modules/light-switch)',
-    'module allows users to toggle dark/light modes, which will also recolor pre to match.',
+    ' module allows users to toggle dark/light modes, which will also recolor pre to match.',
   ]),
 
   p([
-    'if you have javascript activated,',
+    'if you have javascript activated, ',
     'just click the small lightbulb in the top right corner of this page to test this.',
   ]),
 
@@ -71,7 +76,7 @@ const foo = bar => {
   p([
     'Pre can handle urls even though they look like comments.',
     ' Those urls will even turn into Link elements.',
-    ' Urls are identified by containing the three characters://',
+    ' Urls are identified by containing the three characters `://`',
   ]),
 
   Pre({ lines: false }, 'https://jaeh.at'),
@@ -96,20 +101,20 @@ const foo = bar => {
 
   Pre('mail@jaeh.at'),
 
-  Pre('mailto: mail@jaeh.at'),
+  Pre('mailto:mail@jaeh.at'),
 
   h4('link in a comment:'),
 
   Pre(`
 const v = "t" // comment https://jaeh.at
-// and in a comment starting the line https://wizardsatwork.at
+// and in a comment starting the line https://artificialmuseum.com
   `),
 
   h4('Without line numbers'),
 
   Pre(`
   Pre({ lines: false }, \`
-    String to highlight
+String to highlight
 without
 line
 numbers
