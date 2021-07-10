@@ -1,6 +1,6 @@
 ## @magic-modules/pre
 
-syntax highlighting for [@magic](https://magic.github.io/core)
+syntax highlighting for [@magic](https://magic.github.io/core/)
 
 
 [![NPM version][npm-image]][npm-url]
