@@ -20,7 +20,7 @@ export const View = (props, str) => {
 
   let classes = {
     Pre: true,
-    lines: !lines || lines !== 'false',
+    lines: lines && lines !== 'false',
   }
 
   return div({ class: classes }, [
@@ -150,6 +150,7 @@ export const style = {
   position: 'relative',
   whiteSpace: 'pre',
   textAlign: 'left',
+  overflowX: 'auto',
 
   '&.lines': {
     pre: {
@@ -174,7 +175,7 @@ export const style = {
   },
 
   pre: {
-    overflowX: 'auto',
+    width: 0,
 
     '> code': {
       display: 'block',
@@ -189,7 +190,7 @@ export const style = {
 
   '.menu': {
     position: 'absolute',
-    marginTop: '-2em',
+    marginTop: '-1em',
     right: 0,
   },
 
