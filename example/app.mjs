@@ -11,8 +11,9 @@ export const state = {
       to: '/#syntax',
       text: 'syntax',
       items: [
-        { to: '/#syntax-comments', text: 'comments' },
-        { to: '/#syntax-urls', text: 'urls' },
+        { to: '-comments', text: 'comments' },
+        { to: '-urls', text: 'urls' },
+        { to: '-emails', text: 'emails' },
       ],
     },
     { to: '/#source', text: 'source' },
