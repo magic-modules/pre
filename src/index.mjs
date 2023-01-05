@@ -154,7 +154,6 @@ export const style = {
   position: 'relative',
   whiteSpace: 'pre',
   textAlign: 'left',
-  overflowX: 'auto',
 
   '&.lines': {
     pre: {
@@ -179,7 +178,7 @@ export const style = {
   },
 
   pre: {
-    width: 0,
+    overflowX: 'auto',
 
     '> code': {
       display: 'block',
