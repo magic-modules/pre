@@ -101,6 +101,10 @@ export const Word = word => {
     cl = 'state'
   } else if (word === 'actions') {
     cl = 'actions'
+  } else if (word === 'effects') {
+    cl = 'effects'
+  } else if (word === 'subscriptions') {
+    cl = 'subscriptions'
   } else if (lib.pre.keywords.includes(word)) {
     cl = 'keyword'
   } else if (lib.pre.builtins.includes(word)) {
