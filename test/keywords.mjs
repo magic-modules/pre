@@ -9,7 +9,7 @@ const before = () => {
   }
 }
 
-const expect = (cl, word) => ['span', { class: cl }, word]
+const expect = (cl, word) => `<span class="${cl}">${word}</span>`
 
 export default [
   ...pre.builtins.map(builtin => ({

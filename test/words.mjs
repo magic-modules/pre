@@ -14,7 +14,7 @@ export default [
     fn: () => Pre.Words("before 'testing' after"),
     expect: [
       ['before', ' '],
-      ['span', { class: 'string' }, "'testing'"],
+      '<span class="string">&#39;testing&#39;</span>',
       [' ', 'after'],
     ],
     html,
@@ -25,7 +25,7 @@ export default [
     fn: () => Pre.Words("before 'testing' after"),
     expect: [
       ['before', ' '],
-      ['span', { class: 'string' }, "'testing'"],
+      '<span class="string">&#39;testing&#39;</span>',
       [' ', 'after'],
     ],
     html,
