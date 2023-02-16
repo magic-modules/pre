@@ -12,22 +12,14 @@ const before = () => {
 export default [
   {
     fn: () => Pre.Words("before 'testing' after"),
-    expect: [
-      ['before', ' '],
-      '<span class="string">&#39;testing&#39;</span>',
-      [' ', 'after'],
-    ],
+    expect: [['before', ' '], '<span class="string">&#39;testing&#39;</span>', [' ', 'after']],
     html,
     before,
     info: '@magic-modules/pre works',
   },
   {
     fn: () => Pre.Words("before 'testing' after"),
-    expect: [
-      ['before', ' '],
-      '<span class="string">&#39;testing&#39;</span>',
-      [' ', 'after'],
-    ],
+    expect: [['before', ' '], '<span class="string">&#39;testing&#39;</span>', [' ', 'after']],
     html,
     before,
     info: '@magic-modules/pre works',
