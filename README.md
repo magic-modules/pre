@@ -93,7 +93,8 @@ bump required node version to 14.15.4
 
 - change some styles
 - handle lines config parameter correctly
+- update dependencies
 
-##### 0.0.13 - unreleased
+##### 0.0.15 - unreleased
 
 ...
